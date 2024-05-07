@@ -1,0 +1,61 @@
+﻿
+
+.fade-out{
+    animation:fade-out linear;
+    animation-timeline: view();
+    animation-range: contain cover;
+}
+
+@keyframes fade-out{
+    from{
+        scale:1;
+        opacity:1;
+    }
+    80%{
+        scale:0.9;
+        opacity:0.2;
+    }
+    to{
+        scale:0.8;
+        opacity:0;
+    }
+}
+
+.fade-in {
+    animation: fade-in linear;
+    animation-timeline: view();
+    animation-range: cover contain;
+}
+
+@keyframes fade-in {
+    from {
+        scale: 0.9;
+        opacity: 0;
+    }
+
+    to {
+        scale: 1;
+        opacity: 1;
+    }
+}
+
+.opacity-out {
+    animation: opacity-out linear;
+    animation-timeline: view();
+    animation-range: contain cover;
+}
+
+@keyframes opacity-out {
+    from {
+        opacity: 1;
+    }
+    50%{
+        opacity:0.6;
+    }
+    80%{
+        opacity:0.5;
+    }
+    to {
+        opacity: 0;
+    }
+}

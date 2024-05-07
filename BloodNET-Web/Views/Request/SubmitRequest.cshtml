@@ -1,0 +1,64 @@
+﻿<section class="donor-details">
+    <div class="col-12">
+        <h2 class="text-center pb-2">Submit Your Blood Request</h2>
+    </div>
+    <div class="container donor-container"
+         style="background: url(/img/right-image.jpg) no-repeat center; background-size: cover; width: 100%;">
+        <form id="donor-form">
+            <div class="row">
+                <div class="col-6 col-sm-6 col-md-4 col-lg-2">
+                    <label for="d-blood-group">Blood Group Required</label>
+                    <select id="d-blood-group" required>
+                        <option value="" disabled selected>Select Group</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                    </select>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <label for="d-time">Date & Time</label>
+                    <input type="datetime-local" id="d-age" placeholder="Enter Age" required>
+                </div>
+                <div class="row">
+
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                        <label for="d-name">Blood Recipient Name</label>
+                        <input type="text" id="d-name" placeholder="Enter Name" required>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                        <label for="d-phone">Blood Recipient Phone</label>
+                        <input type="tel" id="d-phone" placeholder="Enter Phone Number" required>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="d-address">Location</label>
+                        <input type="text" id="d-address" placeholder="Enter Address" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="d-medical-history">Blood Required for</label>
+                        <textarea id="d-medical-history" placeholder="Enter the purpose of blood required" required
+                                  style="height: 100px;"></textarea>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col">
+                        <button type="submit" class="btn ">Submit Request</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+</section>
+
