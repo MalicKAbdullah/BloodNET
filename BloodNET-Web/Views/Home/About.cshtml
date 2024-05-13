@@ -1,0 +1,130 @@
+﻿    <section class="hero">
+    <div class="container text-center">
+        <h2>Be the Reason Someone Lives</h2>
+        <h3>One easy donation. A lifetime of gratitude. Donate blood and save a life today.</h3>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="row align-items-center">
+            <div class="col-md-7">
+            <h2 class="section-heading"><span style="color:var(--clr-red)">BloodNET</span>: Bridging the Gap in Blood Availability</h2>
+            <p>BloodNET is a revolutionary platform designed to streamline the blood donation process, connecting potential donors with those in critical need of blood transfusions. We empower individuals to become heroes in their communities by simplifying the search and communication between blood requesters and donors. Our user-friendly platform eliminates unnecessary steps and facilitates immediate connections, ensuring timely access to life-saving blood transfusions.</p>
+            </div>
+            <div class="offset-md-1 col-md-4 col-5 slide-in-right">
+                <img src="/img/heart.jpg" alt="BloodNET Logo" class="img-fluid">
+            </div>
+        </div>
+    </section>
+
+    <section class="mt-5">
+    <div class="container col-md-8 col-12" style="text-align:justify;">
+        <h2>Our Vision</h2>
+        <p>We envision a world where everyone has access to the lifesaving gift of blood, regardless of location or circumstance. Through innovation and community engagement, BloodNET strives to create a robust blood donation network that eliminates shortages and empowers individuals to make a life-saving difference.</p>
+    </div>
+    </section>
+
+<section class="cta-message my-5">
+    <div class="container-fluid align-content-center text-center slide-in-left">
+        <div class="row ">
+            <div class="col-8">
+                <h3 class="my-3">Together, We Can Save Lives</h3>
+                <a href="@Url.Action("Signup","User")" class="btn-design-fill">Be a part of BloodNET</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <section class="container mt-5">
+    <h2 class="pt-3">How <span style="color:var(--clr-red)">BloodNET</span> Works: A Seamless Experience</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-12 mt-3">
+                <div class="card how-it-works">
+                    <div class="card-body">
+                        <h5 class="card-title">For Blood Donors</h5>
+                        <ul class="card-list">
+                        <li><strong>Effortless Registration:</strong> Sign up for a free BloodNET account and create your personalized profile.</li>
+                        <li><strong>Eligibility Check:</strong> Our system guides you through a quick and confidential health questionnaire to determine your eligibility to donate.</li>
+                        <li><strong>Real-Time Matching:</strong> Our advanced algorithm matches your blood type, location, and other vital information with compatible blood requests in real-time.</li>
+                        <li><strong>Seamless Communication:</strong> Receive instant notifications about potential donation opportunities that align with your profile.</li>
+                        <li><strong>Convenient Response:</strong> Simply click the "Accept" button to express your willingness to donate for a specific blood request.</li>
+                        <li><strong>Secure System:</strong> BloodNET prioritizes user privacy and data security. All your information is protected with the latest encryption technology.</li>
+                        </ul>
+                    </div>
+                </div>
+                </div>
+                <div class="col-md-6 col-12 mt-3">
+                    <div class="card how-it-works">
+                        <div class="card-body">
+                            <h5 class="card-title">For Blood Requesters (Hospitals/Clinics/Individuals)</h5>
+                            <ul class="card-list">
+                        <li><strong>Simplified Request Submission:</strong> Submit a detailed blood request through our secure platform, specifying the required blood type, urgency level, and other relevant details.</li>
+                        <li><strong>Real-Time Visibility:</strong> Your request instantly appears on the BloodNET network, visible to compatible donors in your area.</li>
+                        <li><strong>Efficient Matching:</strong> Our algorithm prioritizes potential donors based on location, blood type, and other criteria to ensure the fastest possible match.</li>
+                        <li><strong>Direct Communication:</strong> Once a donor accepts your request, you will receive their contact information to coordinate the blood donation process directly.</li>
+                            </ul>
+                        </div>
+                    </div>
+          
+            </div>
+    </section>
+
+    <section class="container mt-5 col-md-8 col-12">
+        <h2 class="section-heading">Blood Donation Eligibility</h2>
+        <p>While most healthy adults can be blood donors, there are some general eligibility criteria. To learn more about specific requirements, please visit our comprehensive FAQ section or consult with a healthcare professional.</p>
+        <ul>
+            <li><strong>Age:</strong> Typically between 17-70 years old (may vary by location)</li>
+        <li><strong>Weight:</strong> Minimum weight requirement (varies by location)</li>
+        <li><strong>History:</strong> Free from certain medical conditions or recent illnesses</li>
+        <li><strong>Medications:</strong> Some medications may temporarily disqualify you from donating</li>
+        </ul>
+
+   <a href="@Url.Action("Index","Home")#faqs"> <button type="submit" class=" btn text-white p-2" style="background-color:var(--clr-red);">Read FAQs for more information</button>
+    </a>
+</section>
+
+        @section css{
+            <style>
+
+ 
+            .cta-message .container-fluid{
+                background: url(/img/cta-bg.jpg) no-repeat center;
+    background-size: cover;
+    height: 25vh;
+            }
+
+        .hero .container {
+            height: 43vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .how-it-works .card {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            padding: 20px;
+        }
+
+        .how-it-works .card-title {
+            font-weight: bold;
+        }
+
+        .how-it-works .card-list {
+            list-style: none;
+            padding: 0;
+        }
+
+            .how-it-works .card-list li {
+                margin-bottom: 10px;
+            }
+
+
+        .call-to-action .btn {
+            margin: 10px;
+        }
+   
+
+    </style>
+        }

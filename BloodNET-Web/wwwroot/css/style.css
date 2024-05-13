@@ -1,5 +1,5 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 :root {
     --clr-dark: #313131;
     --clr-light: #f6f6f6;
@@ -13,14 +13,23 @@
     box-sizing: border-box;
 }
 
+@font-face {
+    font-family: 'BloodNET-Regular';
+   src : url('GoogleSans-Regular.ttf') format('truetype');
+   font-weight:normal;
+   font-style:normal;
+}
+
 body {
-    font-family: 'Poppins', sans-serif;
+    /*    font-family: 'Poppins', sans-serif;*/
+    font-family: 'BloodNET-Regular', Arial, sans-serif;
+
 }
 
 .navbar-brand {
-    font-weight: 500;
+    font-weight: 600;
     color: var(--clr-red);
-    font-size: 24px;
+    font-size: 30px;
     transition: 0.3s color;
 }
 
@@ -28,34 +37,37 @@ body {
     background-color: #ffffff;
     color: var(--clr-red);
     border: 1px groove var(--clr-red);
-    font-size: 14px;
+    font-size: .9411764706rem;
     padding: 8px 20px;
     border-radius: 50px;
     text-decoration: none;
     transition: 0.3s background-color;
 }
 
-    .btn-design-fill
- {
-        background-color: var(--clr-red);
-        color: var(--clr-light) !important;
-        font-size: 14px;
-        padding: 8px 20px;
-        border-radius: 50px;
-        text-decoration: none;
-        transition: 0.3s background-color;
+.btn-design-fill {
+    background-color: var(--clr-red);
+    color: var(--clr-light) !important;
+    font-size: .9411764706rem;
+    padding: 8px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: 0.3s background-color;
+}
+
+    .btn-design-fill:hover {
+        background-color: #ffffff;
+        color: var(--clr-red) !important;
+        border: 1px groove var(--clr-red);
+        box-shadow: black 2px 4px;
+        transition: 0.4s;
     }
 
-        .btn-design-fill:hover {
-            background-color: #ffffff;
-            color: var(--clr-red) !important;
-            border: 1px groove var(--clr-red);
-        }
-
-    .btn-design-outline:hover {
-        background-color: var(--clr-red);
-        color: var(--clr-light) !important;
-    }
+.btn-design-outline:hover {
+    background-color: var(--clr-red);
+    color: var(--clr-light) !important;
+    box-shadow: black 2px 4px;
+    transition: 0.4s;
+}
 
 .navbar-toggler {
     border: none;
@@ -106,13 +118,13 @@ body {
 }
 
 .hero-section {
-    background: url(/img/hero-section.jpg) no-repeat center;
+    background: url(/img/identity-bg.png) no-repeat;
     background-size: cover;
-    width: 100%;
 }
 
     .hero-section .container {
-        height: 100vh;
+        height: 91vh;
+    
     }
 
 .about-section {
@@ -128,31 +140,68 @@ body {
         height: 60vh;
     }*/
 
-
-h1 {
-    font-size:4.5rem;
-    font-weight: 700;
-    letter-spacing: -1.2px;
+@media (min-width: 600px) {
+    h1 {
+        font-size: 70px;
+        line-height: 80px;
+        font-weight: 600;
+    }
 }
 
-h2 {
-    font-size: 36px;
-    font-weight: 600;
-    letter-spacing: -1px;
+@media (max-width: 599px) {
+    h1 {
+        font-size: 36px;
+        line-height: 40px;
+        font-weight:600;
+    }
 }
 
-h3 {
-    font-weight: 400;
-    letter-spacing: -1px;
+@media (min-width: 600px) {
+    h2 {
+        font-size: 2.5rem;
+        line-height: 1.2;
+        font-weight: 400;
+        letter-spacing: -.5px;
+    }
+}
+
+@media (max-width:599px) {
+    h2 {
+        font-size: 2.25rem;
+        line-height: 1.2222222222;
+        font-weight: 400;
+        letter-spacing: -.25px;
+    }
+}
+
+@media (min-width: 600px) {
+    h3 {
+        font-size: 1.75rem;
+        line-height: 1.2857142857;
+        font-weight: 400;
+        letter-spacing: normal;
+    }
+}
+
+@media (max-width:599px) {
+    h3 {
+        font-size: 1.5rem;
+        line-height: 1.3333333333;
+        font-weight: 400;
+        letter-spacing: normal;
+    }
 }
 
 h4 {
-    font-weight: 400;
-    font-size: large;
+    font-size: 1.4117647059rem;
+    line-height: 2.1176470588rem;
 }
 
 p {
-    letter-spacing: -0.1px;
+    font-size: 1.25rem;
+    line-height: 1.4;
+    font-weight: 400;
+    letter-spacing: normal;
 }
 
 .info-section{
@@ -164,8 +213,10 @@ p {
 }
 
 .card-text {
-    font-size: 16px;
-    letter-spacing: -0.2px;
+    font-size: 1.15rem;
+    line-height: 1.4;
+    font-weight: 400;
+    letter-spacing: normal;
 }
 
 .profile img {
@@ -179,8 +230,9 @@ p {
 }
 
 .testimonials-section {
-    background-color: var(--clr-light);
-    min-height:60vh;
+    background-color: #ffffff;
+    background-image: linear-gradient(90deg, #ffffff 0%, #ffffff 33%, #e8e8e8 66%, #b7b7b7 100%);
+    min-height: 60vh;
 }
 
     .testimonials-section .card {
@@ -205,6 +257,10 @@ p {
 
     .testimonials-section p {
         padding: 5px 10%;
+        font-size: 1.05rem;
+        line-height: 1.4;
+        font-weight: 400;
+        letter-spacing: normal;
     }
 
 .cta-message .container {
@@ -213,9 +269,6 @@ p {
     height: 25vh;
 }
 
-    .cta-message .container h2 {
-        font-size: 29px;
-    }
 
 footer .top-bar {
     background-color: var(--clr-red);
@@ -252,19 +305,29 @@ footer .top-bar i {
     }
 
 .footer-section h2 {
-    font-size: 24px;
+    font-size: 1.55rem;
+    line-height: 1.4;
+    font-weight: 600;
+    letter-spacing: normal;
 }
 
 .footer-section h3 {
-    font-size: 16px;
-    letter-spacing: -0.5px;
+    font-size: 1.15rem;
+    line-height: 1.4;
+    font-weight: 400;
+    letter-spacing: normal;
 }
 
 /* LOGIN_FORM  */
 /**/
 
 .login-form {
-    background-color: var(--clr-gray);
+    background: url(/img/identity-bg.png) center no-repeat;
+    background-size: cover;
+    width: 100%;
+    opacity: 0.9;
+
+    /*background-color: var(--clr-gray);*/
     height: 100vh;
     justify-content: center;
     align-items: center;
@@ -273,11 +336,14 @@ footer .top-bar i {
 
     .login-form .container {
         background-color: rgb(255, 255, 255);
+        /*box-shadow: var(--clr-red) 1px 1px 1px 1px;*/
+        box-shadow: var(--clr-red) 2px 4px;
+        border: 2px solid var(--clr-gray);
         border-radius: 10px;
         justify-content: center;
         align-items: center;
         align-content: center;
-        padding: 50px 20px;
+        padding: 5px 20px;
     }
 
         .login-form .container input {
@@ -286,18 +352,18 @@ footer .top-bar i {
             border: none;
             padding: 10px;
             outline: none;
-            font-size: small;
+            
         }
 
         .login-form .container label,
         p,
         a {
-            font-size: 14px;
+            font-size: 16px;
         }
 
 .input-container:focus-within {
-    border-bottom: 1px solid var(--clr-red) !important;
-    transition: 0.5s border linear;
+    border-bottom: 2px solid var(--clr-red) !important;
+    transition: 0.1s border linear;
 }
 
 /* Contact */
@@ -305,7 +371,7 @@ footer .top-bar i {
 .contact-form {
     height: 88vh;
     justify-content: center;
-    padding: 30px 0;
+    padding: 10px 0;
 }
 
 
@@ -314,7 +380,7 @@ footer .top-bar i {
         width: 100%;
         padding: 10px;
         margin-top: 5px;
-        border: 1px solid var(--clr-gray);
+        border: 2px solid var(--clr-gray);
         border-radius: 5px;
     }
 
@@ -323,11 +389,10 @@ footer .top-bar i {
         textarea:focus {
             outline: none;
             box-shadow: none;
-            border: 1px solid var(--clr-red);
+            border: 2px solid var(--clr-red);
         }
 
     .contact-form .container label,
-    p,
     a {
         font-size: 14px;
     }
@@ -341,10 +406,10 @@ footer .top-bar i {
         .contact-form a:hover {
             color: var(--clr-red);
         }
-
+/*
     .contact-form h2 {
         font-size: 24px;
-    }
+    }*/
 
     .contact-form h3 {
         font-size: 16px;
@@ -390,14 +455,7 @@ footer .top-bar i {
     padding: 30px 0;
 }
 
-    .donor-details h2,
-    .contact-form h1 {
-        font-size: 36px;
-        font-weight: 600;
-        letter-spacing: -1px;
-        text-align: center;
-        margin-top: 10px;
-    }
+   
 
 .donor-container,
 .contact-form .container {
@@ -410,9 +468,8 @@ footer .top-bar i {
 
 .donor-container legend{
     letter-spacing: -1.0px;
-    border-bottom: 2px solid var(--clr-red);
+    border-bottom: 3px solid var(--clr-red);
     width:auto;
-
 }
 
     .donor-container label {
@@ -505,21 +562,20 @@ textarea:focus {
 .submitted-information,
 .user-requests,
 .realtime-requests {
-    padding: 50px 0;
+    padding: 30px 0;
 }
 
-    .submitted-information h4 {
+/*    .submitted-information h4 {
         margin-top: 15px;
         margin-bottom: 5px;
         font-weight: 500;
         font-size: large;
-    }
+    }*/
 
     .submitted-information p {
         margin-bottom: 15px;
-        color: #666;
-        font-size: 16px;
-    }
+/*        font-size: 16px;
+*/    }
 
 .accordion {
     --bs-accordion-btn-focus-box-shadow: none;
@@ -533,9 +589,7 @@ textarea:focus {
 }
 
 .user-requests p {
-    font-size: 16px;
     margin: 10px 0;
-    color: #666;
 }
 
 .user-requests .action-class {

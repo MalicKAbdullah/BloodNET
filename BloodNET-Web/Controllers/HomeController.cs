@@ -1,4 +1,5 @@
 using BloodNET_Web.Models;
+using BloodNET_Web.Models.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -28,9 +29,17 @@ namespace BloodNET_Web.Controllers
 			return View();
 		}
 
-        public IActionResult Realtime()
+        public IActionResult About()
         {
             return View();
+        }
+
+        public IActionResult Realtime()
+        {
+            BloodRequestsRepository bloodRequestsRepository = new BloodRequestsRepository();
+            List<BloodRequests> bloodRequests = bloodRequestsRepository.GetAll();
+
+            return View(bloodRequests);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

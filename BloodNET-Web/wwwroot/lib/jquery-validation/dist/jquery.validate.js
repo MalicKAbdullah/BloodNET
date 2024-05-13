@@ -6,13 +6,19 @@
  * Copyright (c) 2022 Jörn Zaefferer
  * Released under the MIT license
  */
+
+
+<head>
+
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+</head>
 (function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
 		define( ["jquery"], factory );
 	} else if (typeof module === "object" && module.exports) {
 		module.exports = factory( require( "jquery" ) );
 	} else {
-		factory( jQuery );
+		factory(jQuery);
 	}
 }(function( $ ) {
 

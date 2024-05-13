@@ -1,0 +1,108 @@
+﻿@page
+@model RegisterModel
+
+
+<div class="login-form">
+    <div class="container col-lg-4 col-md-6  col-10" >
+        <div class="row">
+
+            <h1 class="text-center mb-3 mt-4 mt-md-0">
+                <a href="@Url.Action("Index","Home")" style="text-decoration: none; color: #eb0202; font-size: 36px;">BloodNET</a>
+            </h1>
+            <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                <div class=" d-flex flex-column">
+                    <div asp-validation-summary="ModelOnly" class="text-danger validate-span" role="alert"></div>
+                    <div class="col-12">
+                        <label asp-for="Input.FirstName" class="mt-4">Name</label>
+                    </div>
+
+                    <div class="d-flex justify-content-between flex-wrap">
+                        <div class="col-12 col-sm-6 pe-3">
+
+                            <div class="form-floating  input-container border-bottom mt-1">
+                                <span>
+                                    <i class="fa fa-regular fa-user"></i>
+                                    <input asp-for="Input.FirstName" autocomplete="" aria-required="true" placeholder="First Name" />
+                                </span>
+                            </div>
+                         </div>
+
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-floating  input-container border-bottom mt-1">
+                                        <span>
+                                            <i class="fa fa-regular fa-user"></i>
+                                            <input asp-for="Input.LastName" autocomplete="" aria-required="true" placeholder="Last Name" />
+                                        </span>
+                                    </div>
+                                </div>
+                                </div>
+                                
+
+
+                                <label asp-for="Input.Email" class="mt-4">Email</label>
+                                <div class="form-floating input-container border-bottom mt-1">
+                                    <span>
+                                        <i class="fa fa-regular fa-envelope"></i>
+
+                                        <input asp-for="Input.Email" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                                    </span>
+                                </div>
+                                <span asp-validation-for="Input.Email" class="text-danger validate-span"></span>
+                                
+                    <div class="col-12">
+                        <label asp-for="Input.Password" class="mt-4">Password</label>
+                    </div>
+
+                    <div class="d-flex justify-content-between flex-wrap">
+                        <div class="col-12 col-sm-6 pe-3">
+
+                            <div class="form-floating  input-container border-bottom mt-1">
+                                <span>
+                                    <i class="fa fa-regular fa-lock"></i>
+                                    <input asp-for="Input.Password" autocomplete="new-password" aria-required="true" placeholder="Enter Password" />
+                                </span>
+                            </div>
+                            <span asp-validation-for="Input.Password" class="text-danger validate-span"></span>
+                        </div>
+
+                        <div class="col-12 col-sm-6">
+                            <div class="form-floating  input-container border-bottom mt-1">
+                                <span>
+                                    <i class="fa fa-regular fa-lock"></i>
+                                    <input asp-for="Input.ConfirmPassword" autocomplete="new-password" aria-required="true" placeholder="Confirm Password" />
+                                </span>
+                            </div>
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger validate-span"></span>
+
+                        </div>
+                    </div>
+
+
+                    <div class="d-flex justify-content-center mt-2  mt-md-3">
+                      
+                                        <button type="submit" id="registerSubmit" style="" class="btn btn-design-fill text-center mt-2">SIGN UP</button>
+                             
+                                </div>
+                                <div class="d-flex justify-content-end mt-4">
+                                    <p class="me-1">Already have an account?</p>
+                                    <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl" class="text-decoration-none"
+                                                                                   style="color:#eb0202;">Login!</a>
+                                </div>
+                           
+            </div>
+                        </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+@section identitycss {
+    <style>
+        .validate-span {
+            font-size: smaller;
+        }
+    </style>
+}
