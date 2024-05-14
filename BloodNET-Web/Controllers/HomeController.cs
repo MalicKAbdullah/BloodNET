@@ -1,5 +1,6 @@
 using BloodNET_Web.Models;
 using BloodNET_Web.Models.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -34,6 +35,7 @@ namespace BloodNET_Web.Controllers
             return View();
         }
 
+        [Authorize]
         public IActionResult Realtime()
         {
             BloodRequestsRepository bloodRequestsRepository = new BloodRequestsRepository();

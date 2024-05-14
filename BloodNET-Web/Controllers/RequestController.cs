@@ -1,9 +1,11 @@
 ﻿using BloodNET_Web.Models;
 using BloodNET_Web.Models.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BloodNET_Web.Controllers
 {
+    [Authorize]
     public class RequestController : Controller
     {
         public IActionResult Index()

@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BloodNET_Web.Controllers
 {
+    [Authorize]
     public class DonorController : Controller
     {
         public IActionResult Index()
