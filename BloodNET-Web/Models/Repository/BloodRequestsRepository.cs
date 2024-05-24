@@ -10,7 +10,7 @@ namespace BloodNET_Web.Models.Repository
         public void Add(BloodRequests bloodRequests)
         {
             SqlConnection sqlConnection = new SqlConnection(connectionstring);
-            string insertQuery = "INSERT INTO BloodRequests(BloodGroup,DateTime,RecipientName,RecipientPhone,Location,Description) VALUES(@bgroup,@dtime,@rname,@rphone,@loc,@desc)";
+            string insertQuery = "INSERT INTO BloodRequests(BloodGroup,DateTime,RecipientName,RecipientPhone,Location,Description,userId) VALUES(@bgroup,@dtime,@rname,@rphone,@loc,@desc,@uId)";
             sqlConnection.Open();
             SqlCommand insertCommand = new SqlCommand(insertQuery, sqlConnection);
 
@@ -20,6 +20,7 @@ namespace BloodNET_Web.Models.Repository
             insertCommand.Parameters.AddWithValue("rphone", bloodRequests.RecipientPhone);
             insertCommand.Parameters.AddWithValue("loc", bloodRequests.Location);
             insertCommand.Parameters.AddWithValue("desc", bloodRequests.Description);
+            insertCommand.Parameters.AddWithValue("uId", bloodRequests.userId);
 
             int rowsAffected = insertCommand.ExecuteNonQuery();
 
@@ -35,9 +36,27 @@ namespace BloodNET_Web.Models.Repository
         {
 
         }
-        public BloodRequests Get(int id)
+        public List<BloodRequests> Get(string id)
         {
-            return null;
+            SqlConnection sqlConnection = new SqlConnection(connectionstring);
+            string selectQuery = "SELECT * FROM BloodRequests where userid = @uid";
+            
+            sqlConnection.Open();
+            SqlCommand selectCommand = new SqlCommand(selectQuery, sqlConnection);
+            selectCommand.Parameters.AddWithValue("uid", id);
+
+            List<BloodRequests> bloodRequests = new List<BloodRequests>();
+
+            SqlDataReader sqlDataReader = selectCommand.ExecuteReader();
+            while (sqlDataReader.Read())
+            {
+
+               BloodRequests bloodRequest = new BloodRequests(int.Parse(sqlDataReader["id"].ToString()),sqlDataReader["bloodgroup"].ToString(), DateTime.Parse(sqlDataReader["datetime"].ToString()), sqlDataReader["recipientname"].ToString(), sqlDataReader["recipientphone"].ToString(), sqlDataReader["Location"].ToString(), sqlDataReader["description"].ToString(), sqlDataReader["userId"].ToString());
+                bloodRequests.Add(bloodRequest);
+            }
+
+            sqlConnection.Close();
+            return bloodRequests;
         }
 
         public List<BloodRequests> GetAll()
@@ -52,7 +71,7 @@ namespace BloodNET_Web.Models.Repository
             SqlDataReader sqlDataReader = selectCommand.ExecuteReader();
             while (sqlDataReader.Read())
             {
-                BloodRequests bloodRequest = new BloodRequests(sqlDataReader["bloodgroup"].ToString(), DateTime.Parse(sqlDataReader["datetime"].ToString()), sqlDataReader["recipientname"].ToString(), sqlDataReader["recipientphone"].ToString(), sqlDataReader["Location"].ToString(), sqlDataReader["description"].ToString());
+                BloodRequests bloodRequest = new BloodRequests(int.Parse(sqlDataReader["id"].ToString()), sqlDataReader["bloodgroup"].ToString(), DateTime.Parse(sqlDataReader["datetime"].ToString()), sqlDataReader["recipientname"].ToString(), sqlDataReader["recipientphone"].ToString(), sqlDataReader["Location"].ToString(), sqlDataReader["description"].ToString(), sqlDataReader["userId"].ToString());
                 bloodRequests.Add(bloodRequest);
             }
 

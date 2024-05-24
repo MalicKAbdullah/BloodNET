@@ -1,58 +1,80 @@
-﻿<section class="submitted-information">
+﻿@using System.Security.Claims
+@model BloodDonors
+
+<section class="submitted-information">
     <div class="container">
-        <div class="row">
-            <div class="col">
-                <h2>Profile Information</h2>
-                <hr>
-                <div class="row">
-                    <div class="col-md-6">
+        <h2>Profile Information</h2>
+        <hr>
+        <div class="row justify-content-around">
+
+                <div class="row justify-content-around">
+                <div class="col-sm-6 col-4 d-flex flex-column align-items-center">
+                    <form method="post" enctype="multipart/form-data">
+                        <div style="position: relative; display: inline-block;" class="offset-2">
+                            <img id="previewImage" src="@(Model.ImgUrl ?? "img/avatar.jpg")" alt="Alternate Text" width="200px" height="200px" class="rounded-circle shadow-4 mb-2" />
+                            <input type="file" name="imageFile" id="imageFile" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer;" onchange="previewFile()">
+                        </div>
+                        <span class="d-flex gap-1 justify-content-center mb-2">
+                            <button type="submit" class="btn btn-design-outline">Change Picture</button>
+                            <button type="submit" class="btn btn-design-fill">Remove Picture</button>
+                        </span>
+
+                    </form>
+                </div>
+                </div>
+            <div class="row">
+                    <div class="col-sm-4 ">
                         <h4>Name:</h4>
-                        <p id="submitted-name">Lorem</p>
+                        <p id="submitted-name">
+                            @MyUsers.GetNameandEmail(User.FindFirst(ClaimTypes.NameIdentifier)?.Value).name
+                        </p>
                     </div>
-                    <div class="col-md-6">
-                        <h4>Date of Birth:</h4>
-                        <p id="submitted-dob">01-01-2000</p>
-                    </div>
+                <div class="col-sm-4 col-12">
+                    <h4>Blood Group:</h4>
+                    <p id="submitted-blood-group">@Model.BloodGroup</p>
                 </div>
+            </div>
+            <div class="row ">
+                <div class="col">
+                    <h4>Phone:</h4>
+                    <p id="submitted-phone">@Model.PhoneNumber</p>
+                </div>
+                <div class="col">
+                    <h4>Email:</h4>
+                    <p id="submitted-email"> @MyUsers.GetNameandEmail(User.FindFirst(ClaimTypes.NameIdentifier)?.Value).email</p>
+                </div>
+            </div>
 
-                <div class="row">
-                    <div class="col-md-3">
+                <div class="row ">
+                    <div class="col">
                         <h4>Gender:</h4>
-                        <p id="submitted-gender">Male</p>
+                        <p id="submitted-gender">@Model.Gender</p>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col">
                         <h4>Weight:</h4>
-                        <p id="submitted-weight">100 kg</p>
+                        <p id="submitted-weight">@Model.Weight @Model.WeightUnit </p>
                     </div>
-                    <div class="col-md-3">
-                        <h4>Blood Group:</h4>
-                        <p id="submitted-blood-group">A+</p>
+                    <div class="col-12 col-md-4">
+                    <h4>Date of Birth:</h4>
+                    <p id="submitted-dob">@DateOnly.FromDateTime(Model.DOB)</p>
+
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <h4>Phone:</h4>
-                        <p id="submitted-phone">03112225785</p>
-                    </div>
-                    <div class="col-md-6">
-                        <h4>Email:</h4>
-                        <p id="submitted-email">sample@email.com</p>
-                    </div>
-                </div>
- 
-                <div class="row">
-                    <div class="col-md-3">
+     
+
+            <div class="row  justify-content-around">
+                    <div class="col">
                         <h4>Country:</h4>
-                        <p id="submitted-country">Pakistan</p>
+                        <p id="submitted-country">@Model.Country</p>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col">
                         <h4>City:</h4>
-                        <p id="submitted-city">Lahore</p>
+                        <p id="submitted-city">@Model.City</p>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-12 col-md-4">
                         <h4>Address:</h4>
-                        <p id="submitted-address">House N/A, Street N/A</p>
+                        <p id="submitted-address">@Model.Address</p>
                     </div>
 
                 </div>
@@ -60,10 +82,7 @@
                     <div class="col-md-12">
                         <h4>Medical History:</h4>
                         <p id="submitted-medical-history" style="text-align:justify;">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio consequuntur dicta necessitatibus dolorum. Rem vero fuga hic atque aliquid dolor voluptatibus maxime sequi assumenda, et velit exercitationem ab esse cum!
-                            Quas voluptatum ducimus aperiam ipsum iure dolores incidunt odio dicta veniam in ipsam ratione, amet quisquam soluta, enim cupiditate adipisci sequi fugit quibusdam nam. Iusto, repellat. Explicabo voluptatum illum corporis.
-                            Labore, placeat. Quia sed quibusdam autem ipsa tempore cumque repudiandae ullam dolor voluptates corporis eveniet, vitae accusamus minima perspiciatis inventore illo praesentium expedita omnis? Accusantium est quia harum ea nihil?
-                            Dolore suscipit sint inventore rerum voluptatum repellat debitis excepturi minima nisi quaerat consectetur adipisci ut molestias enim, itaque repudiandae repellendus, explicabo nihil! Itaque totam quam iure alias magni recusandae commodi!
+                           @Model.MedicalHistory
                         </p>
                     </div>
                 </div>
@@ -72,7 +91,7 @@
                         <button class="btn btn-outline-dark">Update Profile</button>
                     </a>
                 </div>
-            </div>
+
         </div>
     </div>
 </section>
@@ -87,25 +106,40 @@
                         <h3>Blood Donations</h3>
                         <h4 style="color: #eb0202;">3</h4>
                     </div>
-                    </div>
-                    <div class="col">
-
+            </div>
+            <div class="col">
                     <div class="border p-3 rounded">
                         <h3>Last Donation Date</h3>
                         <h4 style="color: #eb0202;">12-12-2021</h4>
                     </div>
-                    </div>
-
-                    <div class="col">
-
+            </div>
+            <div class="col">
                     <div class="border p-3 rounded">
                         <h3>Last Donation Place</h3>
                         <h4 style="color: #eb0202;">Doctors Hospital</h4>
                     </div>
-   
-                </div>
             </div>
         </div>
-    
+    </div>
 </section>
 
+@section myjs{
+
+    <script>
+        function previewFile() {
+            var preview = document.getElementById('previewImage');
+            var file = document.getElementById('imageFile').files[0];
+            var reader = new FileReader();
+
+            reader.onloadend = function () {
+                preview.src = reader.result;
+            }
+
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = "img/avatar.jpg";
+            }
+        }
+    </script>
+}

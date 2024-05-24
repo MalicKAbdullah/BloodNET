@@ -6,9 +6,9 @@
         <h2>
             Imagine the feeling of knowing you saved a life
         </h2>
-        <h1  class="text-center">Donate Blood, Save Lives</h1>
+        <h1  class="text-center">Donate Blood, Save <span class="animate-word"></span> Lives</h1>
 
-        <div class="d-flex justify-content-center gap-4 mt-3 text-center">
+        <div class="d-flex justify-content-center gap-3 mt-2 text-center">
             
             <a href="@Url.Action("Realtime","Home")" class="btn-design-outline text-responsive">Donate Blood</a>
             <a href="@Url.Action("SubmitRequest","Request")" class="btn-design-fill  text-responsive">Need Blood</a>
@@ -28,7 +28,7 @@
         <p style="padding-left: 10%; padding-right: 10%; font-size:1.2rem;" class="pt-3">
             BloodNET is a platform dedicated to connecting blood donors with those in need. We believe that everyone deserves access to safe and readily available blood transfusions. Through fostering a spirit of community and social responsibility, BloodNET aims to bridge the gap between blood supply and demand.  Our user-friendly system simplifies the donation process and empowers individuals to become heroes in their own communities. Join BloodNET and be a part of the life-saving network!
         </p>
-        <div class="d-flex gap-3 mb-3 mb-sm-none">
+        <div class="d-flex gap-3 mb-5 mb-sm-none">
             <a href="@Url.Action("About","Home")" class="btn-design-outline">Learn more</a>
         </div>
     </div>
@@ -146,82 +146,117 @@
 
 <!-- End How IT Works -->
 
-<section class="cta-message my-5">
-    <div class="container align-content-center text-center slide-in-left">
-        <div class="row">
-            <div class="col-8">
-                <h3 class="my-3">Together, We Can Save Lives</h3>
-                <a href="@Url.Action("Signup","User")" class="btn-design-fill">Be a part of BloodNET</a>
-            </div>
-        </div>
-    </div>
-</section>
+<partial name="_cta" />
 
-<h2 class="text-center" style="margin-top:80px"><span style="color:#eb0202;">BloodNET</span> Testimonials</h2>
+@* <h2 class="text-center" style="margin-top:80px"><span style="color:#eb0202;">BloodNET</span> Testimonials</h2> *@
 <section class="mt-1 pt-5 justify-content-center align-items-center text-center text-black ">
 
-    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner px-xl-5">
-            <div class="carousel-item active">
-                <img class="rounded-circle shadow-1-strong mb-4"
-                     src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp" alt="avatar"
-                     style="width: 150px;" />
-                <div class="row d-flex justify-content-center">
-                    <div class="col-lg-8">
-                        <h5 class="mb-3">Maria Kate</h5>
-                        <p>Photographer</p>
-                        <p class="text-muted">
-                            <i class="fas fa-quote-left pe-2"></i>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus et deleniti
-                            nesciunt sint eligendi reprehenderit reiciendis, quibusdam illo, beatae quia
-                            fugit consequatur laudantium velit magnam error. Consectetur distinctio fugit
-                            doloremque.
-                        </p>
-                    </div>
+    <div class="wrapper">
+        <div>
+            <div class="box">
+                <div class="image">
+
+                    <p>
+                        "I've been a regular donor with BloodNET for years. Their efficient system and friendly staff make every donation experience a breeze."
+                    </p>
+
+                    <h5>Robert Jr.</h5>
                 </div>
-                <ul class="list-unstyled d-flex justify-content-center text-warning mb-0">
-                    <li><i class="fas fa-star fa-sm"></i></li>
-                    <li><i class="fas fa-star fa-sm"></i></li>
-                    <li><i class="fas fa-star fa-sm"></i></li>
-                    <li><i class="fas fa-star fa-sm"></i></li>
-                </ul>
-                </div>
-            <div class="carousel-item ">
-                <img class="rounded-circle shadow-1-strong mb-4"
-                     src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp" alt="avatar"
-                     style="width: 150px;" />
-                <div class="row d-flex justify-content-center">
-                    <div class="col-lg-8">
-                        <h5 class="mb-3">Maria Kate</h5>
-                        <p>Photographer</p>
-                        <p class="text-muted">
-                            <i class="fas fa-quote-left pe-2"></i>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus et deleniti
-                            nesciunt sint eligendi reprehenderit reiciendis, quibusdam illo, beatae quia
-                            fugit consequatur laudantium velit magnam error. Consectetur distinctio fugit
-                            doloremque.
-                        </p>
-                    </div>
-                </div>
-                <ul class="list-unstyled d-flex justify-content-center text-warning mb-0">
-                    <li><i class="fas fa-star fa-sm"></i></li>
-                    <!-- Additional list items for rating stars -->
-                </ul>
             </div>
+            <div class="box">
+                <div class="image">
+
+                    <p>
+                        "I'm grateful for the opportunity to contribute to such a noble cause through BloodNET. Their professionalism and care for donors are truly commendable."
+                    </p>
+
+                    <h5>Emily Smith</h5>
+                </div>
+            </div>
+            <div class="box">
+                <div class="image">
+
+                    <p>
+                        "BloodNET has made donating blood a seamless and rewarding experience. I feel proud to be part of their lifesaving mission."
+                    </p>
+
+                    <h5>Ali Khan</h5>
+                </div>
+            </div>
+
+        </div>
+
+        <div>
+            <div class="box-even">
+                <div class="image">
+
+                    <p>
+                        "I've never felt more valued as a donor than with BloodNET. Their dedication to saving lives is truly inspiring."
+                    </p>
+
+                    <h5>Sarah</h5>
+                </div>
+            </div>
+            <div class="box-even">
+                <div class="image">
+
+                    <p>
+                        "BloodNET's user-friendly platform and supportive team have made my donation journey a fulfilling one. I highly recommend them to all donors."
+                    </p>
+
+                    <h5>Ahmad Ali</h5>
+                </div>
+            </div>
+            <div class="box-even">
+                <div class="image">
+
+                    <p>
+                        "Being a donor with BloodNET has been a rewarding experience. Their commitment to making a difference in the community is truly admirable."
+                    </p>
+
+                    <h5>David Wilson</h5>
+                </div>
+            </div>
+
+        </div>
+
+        <div>
+            <div class="box">
+                <div class="image">
+
+                    <p>
+                        "I've had nothing but positive experiences with BloodNET. Their efficient processes and caring staff have made me a loyal donor."
+                    </p>
+
+                    <h5>Daniel Lee</h5>
+                </div>
+            </div>
+            <div class="box">
+                <div class="image">
+
+                    <p>
+                        "I'm proud to support BloodNET's lifesaving mission. Their dedication to ensuring a smooth donation process is truly commendable."
+                    </p>
+
+                    <h5>Abdul Hannan</h5>
+                </div>
+            </div>
+            <div class="box">
+                <div class="image">
+
+                    <p>
+                        "BloodNET has made it easy for me to give back to the community. Their professionalism and gratitude towards donors make me feel valued and appreciated."
+                    </p>
+
+                    <h5>Ryan Clark</h5>
+                </div>
+            </div>
+    
         </div>
     </div>
-    <!-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
-        data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden" z-200>Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
-        data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button> -->
 
 </section>
+
 
 
 

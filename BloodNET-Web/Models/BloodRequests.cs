@@ -1,4 +1,9 @@
-﻿namespace BloodNET_Web.Models
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using NuGet.Protocol.Core.Types;
+
+namespace BloodNET_Web.Models
 {
     public class BloodRequests
     {
@@ -16,8 +21,16 @@
 
         public int Status { get; set; }
 
-        public BloodRequests(string bloodGroup, DateTime dTime, string recipientName, string recipientPhone, string location, string description)
+        public string userId { get; set; }
+
+        public BloodRequests()
         {
+
+        }
+
+        public BloodRequests(int id,string bloodGroup, DateTime dTime, string recipientName, string recipientPhone, string location, string description,string userID)
+        {
+            Id = id;
             BloodGroup = bloodGroup;
             DTime = dTime;
             RecipientName = recipientName;
@@ -25,6 +38,20 @@
             Location = location;
             Description = description;
             Status = 1;
+            userId = userID;
+        }
+
+        public BloodRequests(string bloodGroup, DateTime dTime, string recipientName, string recipientPhone, string location, string description, string userID)
+        {
+
+            BloodGroup = bloodGroup;
+            DTime = dTime;
+            RecipientName = recipientName;
+            RecipientPhone = recipientPhone;
+            Location = location;
+            Description = description;
+            Status = 1;
+            userId = userID;
         }
     }
 }

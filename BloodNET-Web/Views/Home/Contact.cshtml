@@ -1,5 +1,13 @@
 ﻿@{
-    Layout = "_Layout1";
+    if (User.Identity.IsAuthenticated)
+    {
+        Layout = "_Layout1User";
+    }
+    else
+    {
+        Layout = "_Layout1";
+    }
+
 }
 
 <div class="contact-form">
@@ -10,36 +18,36 @@
     <div class="container col-10">
         <div class="row">
             <div class="col-lg-6 col-12 ">
-                <form action="">
+                <form action="" method="post">
                     <div class=" d-flex flex-column">
                         <div class="  mt-1">
                             <span>
-                                <input type="text" placeholder="Name" required>
+                                <input type="text" placeholder="Name" name="Name" required>
                             </span>
                         </div>
 
                         <div class="d-flex justify-content-between flex-wrap">
                             <div class="col-12 col-sm-6 pe-sm-5">
                                 <div class=" mt-1">
-                                    <input type="email" placeholder="Email Address" required>
+                                    <input type="email" placeholder="Email Address" name="Email" required>
                                 </div>
                             </div>
                             <div class="col-12 col-sm-6">
                                 <div class="mt-1">
-                                    <input type="tel" placeholder="Phone Number" required>
+                                    <input type="tel" placeholder="Phone Number" name="PhoneNumber" required>
                                 </div>
                             </div>
                         </div>
 
                         <div class="mt-1">
                             <span>
-                                <input type="text" placeholder="Subject" required>
+                                <input type="text" placeholder="Subject" name="Subject" required>
                             </span>
                         </div>
 
                         <div class="mt-2">
                             <span>
-                                <textarea id="w3review" placeholder="Leave a Message" name="w3review"
+                                <textarea id="w3review" placeholder="Leave a Message" name="Body"
                                           style="height: 150px; width: 100%;" required></textarea>
                             </span>
                         </div>

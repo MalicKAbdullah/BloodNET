@@ -1,16 +1,55 @@
 ﻿using BloodNET_Web.Models;
+using BloodNET_Web.Models.Interfaces;
 using BloodNET_Web.Models.Repository;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace BloodNET_Web.Controllers
 {
     [Authorize]
     public class RequestController : Controller
     {
+
+        public readonly string connectionString = "Server=(localdb)\\mssqllocaldb;Database=BloodNET;Trusted_Connection=True;MultipleActiveResultSets=true";
+
         public IActionResult Index()
         {
-            return View();
+            BloodRequestsRepository bloodRequestsRepository = new BloodRequestsRepository();
+
+            var userid = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            List<BloodRequests> bloodRequests = bloodRequestsRepository.Get(userid);
+
+            List<List<string>> donorIds = new List<List<string>>();
+            List<DateTime> dateTimes = new List<DateTime>();
+
+            DonationRepository donationRepository = new DonationRepository();
+            foreach (var bloodRequest in bloodRequests)
+            {
+                List<(string,DateTime)> obj = new List<(string, DateTime)>();
+                obj = donationRepository.GetDonors(bloodRequest.Id);
+                List<string> ids = obj.Select(x => x.Item1).ToList();
+                List<DateTime> created = obj.Select(x => x.Item2).ToList();
+                dateTimes.AddRange(created);
+                donorIds.Add(ids);
+           }
+
+            List<List<BloodDonors>> bloodDonors = new List<List<BloodDonors>>();
+            foreach(var ids in donorIds)
+            {
+                List<BloodDonors> donors = BloodDonorsRepository.GetDonorsById(ids);
+                bloodDonors.Add(donors);
+            }
+
+            Respondants respondants = new Respondants 
+            { 
+                BloodDonors = bloodDonors,
+                BloodRequests = bloodRequests,
+                DateTimes = dateTimes,
+            };
+            return View(respondants);
         }
 
         public ViewResult SubmitRequest()
@@ -21,13 +60,26 @@ namespace BloodNET_Web.Controllers
         [HttpPost]
         public IActionResult SubmitRequest(string bloodgroup, DateTime dtime, string rname, string rphone, string raddress, string description)
         {
-            BloodRequests bloodRequests = new BloodRequests(bloodgroup, dtime, rname, rphone, raddress, description);
+
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            BloodRequests bloodRequests = new BloodRequests(bloodgroup, dtime, rname, rphone, raddress, description,userId);
 
             BloodRequestsRepository bloodRequestsRepository = new BloodRequestsRepository();
 
             bloodRequestsRepository.Add(bloodRequests);
 
             return RedirectToAction("Index", "Home");
+
+        }
+
+        [HttpPost]
+
+        public IActionResult delete(int reqId)
+        {
+            IRepository<BloodRequests> repository = new GenericRepository<BloodRequests>(connectionString);
+            repository.Delete(reqId);
+            return RedirectToAction("Index", "Request");
         }
 
 

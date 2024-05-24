@@ -3,9 +3,10 @@ using BloodNET_Web.Models.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace BloodNET_Web.Controllers
-{
+{ 
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -17,6 +18,8 @@ namespace BloodNET_Web.Controllers
 
         public IActionResult Index()
         {
+            
+
             return View();
         }
 
@@ -30,6 +33,14 @@ namespace BloodNET_Web.Controllers
 			return View();
 		}
 
+        [HttpPost]
+        public IActionResult Contact(Contacts contacts)
+        {
+            ContactsRepository contactsRepository = new ContactsRepository();
+            contactsRepository.Add(contacts);
+
+            return View();
+        }
         public IActionResult About()
         {
             return View();

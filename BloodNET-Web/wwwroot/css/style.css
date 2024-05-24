@@ -355,6 +355,11 @@ footer .top-bar i {
             
         }
 
+        option:hover{
+            background-color:var(--clr-red) !important;
+            color:var(--clr-light) !important;
+        }
+
         .login-form .container label,
         p,
         a {
@@ -467,7 +472,7 @@ footer .top-bar i {
 }
 
 .donor-container legend{
-    letter-spacing: -1.0px;
+    letter-spacing: -0.2px;
     border-bottom: 3px solid var(--clr-red);
     width:auto;
 }
@@ -603,3 +608,80 @@ textarea:focus {
     font-size: 16px;
     font-weight: 600;
 }
+
+
+/* for animation */
+.wrapper {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    max-height: 596px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.box {
+    position: relative;
+    animation-name: odd-columns;
+    animation-duration: 7s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: linear;
+    width: 290px;
+    /* height: 168px; */
+    /* border-radius: 12px; */
+    /* background: #f2f2f2; */
+    /* padding: 1rem; */
+    margin: 1rem;
+}
+
+.box-even {
+    position: relative;
+    animation-name: even-columns;
+    animation-duration: 7s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: linear;
+    width: 290px;
+    /* height: 168px;
+            border-radius: 12px;
+            background: #f2f2f2;
+            padding: 1rem; */
+    margin: 1rem;
+}
+
+@keyframes odd-columns {
+    from {
+        top: -450px;
+    }
+
+    to {
+        top: 150px;
+    }
+}
+
+@keyframes even-columns {
+    from {
+        top: 150px;
+    }
+
+    to {
+        top: -450px;
+    }
+}
+
+.image {
+   
+    padding:10px; 
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 2px 2px 8px #d0d0d0;
+
+}
+
+.wrapper h5{
+    color:var(--clr-red);
+}
+

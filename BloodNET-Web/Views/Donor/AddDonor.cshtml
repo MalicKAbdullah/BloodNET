@@ -1,38 +1,39 @@
-﻿
+﻿@using System.Security.Claims
+
 <section class="donor-details">
     <div class="container">
         <div class="row">
             <div class="col">
                 <h2 class="pb-2 text-start">Donor Details</h2>
                 <div class="container donor-container">
-                    <form id="donor-form">
+                    <form id="donor-form" method="post" action="/Donor/AddDonor" enctype="multipart/form-data">
                         <fieldset>
                             <legend>Personal Information</legend>
                             <div class="row">
                                 <div class="col-sm-6 col-md-4 col-lg-3">
                                     <label for="d-name">Name</label>
-                                    <input type="text" id="d-name" placeholder="Enter Name" required>
+                                    <input type="text" id="d-name" placeholder=" @MyUsers.GetNameandEmail(User.FindFirst(ClaimTypes.NameIdentifier)?.Value).name" name="Name" value=" @MyUsers.GetNameandEmail(User.FindFirst(ClaimTypes.NameIdentifier)?.Value).name" disabled>
                                 </div>
                                 <div class="col-6 col-sm-6 col-md-4 col-lg-2">
                                     <label for="d-age">Date of Birth</label>
-                                    <input type="date" id="d-age" placeholder="Enter Age" required>
+                                    <input type="date" id="d-age" placeholder="Enter Age" name="DOB" required>
                                 </div>
                                 <div class="col-6 col-sm-6 col-md-4 col-lg-2">
                                     <label for="d-gender">Gender</label>
-                                    <select id="d-gender" required>
+                                    <select id="d-gender" name="Gender" required>
                                         <option value="" disabled selected>Select Gender</option>
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
-                                        <option value="other">Other</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Other">Other</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-6 col-md-4 col-lg-3">
                                     <label for="d-weight">Weight</label>
                                     <div class="input-group">
                                         <input type="number" id="d-weight" class="form-control weight-input"
-                                               placeholder="Enter Weight" required>
+                                               placeholder="Enter Weight" name="Weight" required>
                                         <div class="input-group-append">
-                                            <select class="custom-select" id="d-weight-unit">
+                                            <select class="custom-select" id="d-weight-unit" name="WeightUnit">
                                                 <option value="kg">kg</option>
                                                 <option value="lbs">lbs</option>
                                             </select>
@@ -41,7 +42,7 @@
                                 </div>
                                 <div class="col-6 col-sm-6 col-md-4 col-lg-2">
                                     <label for="d-blood-group">Blood Group</label>
-                                    <select id="d-blood-group" required>
+                                    <select id="d-blood-group" required name="BloodGroup">
                                         <option value="" disabled selected>Select Group</option>
                                         <option value="A+">A+</option>
                                         <option value="A-">A-</option>
@@ -54,6 +55,11 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="row">
+                                <label name="Image"></label>
+                                   
+                               <input type="file" name="Image" value="" />
+                            </div>
                         </fieldset>
          
                         <fieldset class="mt-4">
@@ -61,25 +67,25 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="d-phone">Phone</label>
-                                    <input type="tel" id="d-phone" placeholder="Enter Phone Number" required>
+                                    <input type="tel" id="d-phone" name="PhoneNumber" placeholder="Enter Phone Number" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="d-email">Email</label>
-                                    <input type="email" id="d-email" placeholder="Enter Email" required>
+                                    <input type="email" id="d-email" name="Email" placeholder=" @MyUsers.GetNameandEmail(User.FindFirst(ClaimTypes.NameIdentifier)?.Value).email" value="@MyUsers.GetNameandEmail(User.FindFirst(ClaimTypes.NameIdentifier)?.Value).email" disabled>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="d-address">Address</label>
-                                    <input type="text" id="d-address" placeholder="Enter Address" required>
+                                    <input type="text" id="d-address" name="Address" placeholder="Enter Address" required>
                                 </div>
                                 <div class="col-6 col-md-3">
                                     <label for="d-country">Country</label>
-                                    <input type="text" id="d-country" placeholder="Enter Country" required>
+                                    <input type="text" id="d-country" name="Country" placeholder="Enter Country" required>
                                 </div>
                                 <div class="col-6 col-md-3">
                                     <label for="d-city">City</label>
-                                    <input type="text" id="d-city" placeholder="Enter City" required>
+                                    <input type="text" id="d-city" name="City" placeholder="Enter City" required>
                                 </div>
                             </div>
                         </fieldset>
@@ -89,13 +95,25 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="d-medical-history">Medical History</label>
-                                    <textarea id="d-medical-history" placeholder="Enter Medical History (Optional)"
-                                              style="height: 100px;"></textarea>
+                                    <textarea id="d-medical-history" name="MedicalHistory" placeholder="Enter Medical History (Optional)"
+                                              style="height: 100px;"  ></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="d-flex ">
+                                <label class="me-3">Are you medically fit?</label>
+
+                                    <label >   <input type="radio" name="isMedicalFit" value="1" class="me-2"></label>
+                                    <label class="me-3">Yes</label>
+
+                                    <label>   <input type="radio" name="isMedicalFit" value="0" class="me-2"></label>
+                                    <label>No</label>
+
                                 </div>
                             </div>
                         </fieldset>
 
-                        <div class="row checkbox-content">
+@*                         <div class="row checkbox-content">
                             <div class="col">
                                 <label for="d-terms" class="form-check-label">
                                     <input type="checkbox" id="d-terms" required>
@@ -110,7 +128,7 @@
                                 agreements.
                             </div>
 
-                        </div>
+                        </div> *@
                         <div class="row mt-3">
                             <div class="col">
                                 <button type="submit" class="btn ">Submit</button>

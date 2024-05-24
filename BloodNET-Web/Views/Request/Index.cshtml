@@ -1,6 +1,11 @@
-﻿@{
-    Layout = "_LayoutUser";
+﻿@model Respondants
+
+@{
+    int idx = -1;
+    int count;
+    int dateTimeIdx = -1;
 }
+
 
 <section class="user-requests">
     <div class="container">
@@ -9,17 +14,18 @@
                 <h2>Your Requests</h2>
                 <hr>
             </div>
+
             <div class="d-flex justify-content-between">
-                <div class="col-3">
+                <div class="col-2">
                     <h3>Blood Group</h3>
                 </div>
-                <div class="col-3">
-                    <h3>Date</h3>
+                <div class="col-5 col-md-4">
+                    <h3 class="ps-5">Date</h3>
                 </div>
-                <div class="col-3">
+                <div class="col-5 col-md-4 ps-4 ps-md-0">
                     <h3>Contact</h3>
                 </div>
-                <div class="col-3">
+                <div class="col-2 d-none d-md-block">
                     <h3>Actions</h3>
                 </div>
             </div>
@@ -27,672 +33,119 @@
     </div>
     <div class="container">
         <div class="accordion w-100" id="basicAccordion">
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="heading1">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#basicAccordionCollapse1" aria-expanded="false"
-                            aria-controls="basicAccordionCollapse1">
-                        <div class="container">
-                            <div class="row">
-                                <div class="d-flex justify-content-between">
-                                    <div class="col-3">
-                                        <p>A+</p>
-                                    </div>
-                                    <div class="col-3">
-                                        <p>12-12-2021</p>
-                                    </div>
-                                    <div class="col-3 ps-3">
-                                        <p>0311-2323432</p>
-                                    </div>
-                                    <div class="col-3 action-class">
-                                        <a href="#" class="btn-design-outline">Edit</a>
-                                        <a href="#" class="btn-design-fill">Delete</a>
-                                        <span class="position-absolute top-50 start-100 translate-middle badge border border-light rounded-circle bg-danger p-1 ps-2 pe-2">
-                                            <span class="visually-hidden">unread messages</span>3
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
+         
+            @foreach(BloodRequests request in Model.BloodRequests)
+            {
+                idx++;
+                count = 0;
 
-                        </div>
-                    </button>
-                </h2>
-                <div id="basicAccordionCollapse1" class="accordion-collapse collapse" aria-labelledby="heading1"
-                     data-bs-parent="#basicAccordion">
-                    <div class="accordion-body">
-                        <div class="container">
-                            <div class="row">
-                                <div class="d-flex justify-content-between mt-2">
-                                    <div class="col-1">
-                                        <h4>#</h4>
-                                    </div>
-                                    <div class="col">
-                                        <h4>Username</h4>
-                                    </div>
-                                    <div class="col">
-                                        <h4>Name</h4>
-                                    </div>
-                                    <div class="col">
-                                        <h4>Contact No.</h4>
-                                    </div>
-                                    <div class="col">
-                                        <h4>Time</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="d-flex justify-content-between mt-2">
-                                    <div class="col-1">
-                                        <p>1</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>malik456</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>Abdullah Malik</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>03212232323</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>23 Apr 2024 01:32 pm</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="d-flex justify-content-between mt-2">
-                                    <div class="col-1">
-                                        <p>2</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>malik456</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>Abdullah Malik</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>03212232323</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>23 Apr 2024 01:32 pm</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="d-flex justify-content-between mt-2">
-                                    <div class="col-1">
-                                        <p>3</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>malik456</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>Abdullah Malik</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>03212232323</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>23 Apr 2024 01:32 pm</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="heading2">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#basicAccordionCollapse2" aria-expanded="false"
-                            aria-controls="basicAccordionCollapse2">
-                        <div class="container">
-                            <div class="row">
-                                <div class="d-flex justify-content-between">
-                                    <div class="col-3">
-                                        <p>B+</p>
-                                    </div>
-                                    <div class="col-3">
-                                        <p>12-12-2021</p>
-                                    </div>
-                                    <div class="col-3 ps-3">
-                                        <p>0311-2323432</p>
-                                    </div>
-                                    <div class="col-3 action-class">
-                                        <a href="#" class="btn-design-outline">Edit</a>
-                                        <a href="#" class="btn-design-fill">Delete</a>
-                                        <span class="position-absolute top-50 start-100 translate-middle badge border border-light rounded-circle bg-danger p-1 ps-2 pe-2">
-                                            <span class="visually-hidden">unread messages</span>2
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </button>
-                </h2>
-                <div id="basicAccordionCollapse2" class="accordion-collapse collapse" aria-labelledby="heading2"
-                     data-bs-parent="#basicAccordion">
-                    <div class="accordion-body">
-                        <div class="container">
-                            <div class="row">
-                                <div class="d-flex justify-content-between mt-2">
-                                    <div class="col-1">
-                                        <h4>#</h4>
-                                    </div>
-                                    <div class="col">
-                                        <h4>Username</h4>
-                                    </div>
-                                    <div class="col">
-                                        <h4>Name</h4>
-                                    </div>
-                                    <div class="col">
-                                        <h4>Contact No.</h4>
-                                    </div>
-                                    <div class="col">
-                                        <h4>Time</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="d-flex justify-content-between mt-2">
-                                    <div class="col-1">
-                                        <p>1</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>malik456</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>Abdullah Malik</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>03212232323</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>23 Apr 2024 01:32 pm</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="d-flex justify-content-between mt-2">
-                                    <div class="col-1">
-                                        <p>2</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>malik456</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>Abdullah Malik</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>03212232323</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>23 Apr 2024 01:32 pm</p>
-                                    </div>
-                                </div>
-                            </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id=$"heading{@request.Id}">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#basicAccordionCollapse{@request.Id}" aria-expanded="false"
+                                aria-controls="basicAccordionCollapse{@request.Id}">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="d-flex justify-content-between">
+                                        <div class="col-2">
+                                            <p>@request.BloodGroup</p>
+                                        </div>
+                                        <div class="col-5 col-md-4">
+                                            <p>@request.DTime</p>
+                                        </div>
+                                        <div class="col-5 col-md-4 ps-1 ps-md-0 d-flex justify-content-center justify-content-md-between">
+                                            <p>@request.RecipientPhone</p>
+                                        </div>
+                                        <div class="col-12 col-md-2 ps-md-4 d-flex d-none d-md-block">
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <!-- We will contatenate requestid into id below at the end to separate it -->
-                <h2 class="accordion-header" id="heading3">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#basicAccordionCollapse3" aria-expanded="false"
-                            aria-controls="basicAccordionCollapse3">
-                        <div class="container">
-                            <div class="row">
-                                <div class="d-flex justify-content-between">
-                                    <div class="col-3">
-                                        <p>AB+</p>
-                                    </div>
-                                    <div class="col-3">
-                                        <p>12-12-2021</p>
-                                    </div>
-                                    <div class="col-3 ps-3">
-                                        <p>0311-2323432</p>
-                                    </div>
-                                    <div class="col-3 action-class">
-                                        <a href="#" class="btn-design-outline">Edit</a>
-                                        <a href="#" class="btn-design-fill">Delete</a>
-                                        <span class="position-absolute top-50 start-100 translate-middle badge border border-light rounded-circle bg-danger p-1 ps-2 pe-2">
-                                            <span class="visually-hidden">unread messages</span>3
-                                        </span>
+                                 
+                                            <form method="post" action="/Request/Delete">
+                                             
+                                                    <input name="reqId" class="d-none" value="@request.Id" />
+                                                <input type="submit" class="btn btn-design-fill" value="Delete" />
+                                            </form>
+                                         
+                                        </div>
+                                            <span class="position-absolute top-50 start-100 translate-middle badge border border-light rounded-circle bg-danger p-1 ps-2 pe-2">
+                                                <span class="visually-hidden">unread messages</span>@Model.BloodDonors.ElementAt(idx).Count
+                                            </span>
                                     </div>
                                 </div>
+                                <div class="row d-block d-md-none ">
+                                    <div class="col-12">
 
-                            </div>
-                            </div>
-                    </button>
-                </h2>
-                <div id="basicAccordionCollapse3" class="accordion-collapse collapse" aria-labelledby="heading3"
-                     data-bs-parent="#basicAccordion">
-                    <div class="accordion-body">
-                        <div class="container">
-                            <div class="row">
-                                <div class="d-flex justify-content-between mt-2">
-                                    <div class="col-1">
-                                        <h4>#</h4>
-                                    </div>
-                                    <div class="col">
-                                        <h4>Username</h4>
-                                    </div>
-                                    <div class="col">
-                                        <h4>Name</h4>
-                                    </div>
-                                    <div class="col">
-                                        <h4>Contact No.</h4>
-                                    </div>
-                                    <div class="col">
-                                        <h4>Time</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="d-flex justify-content-between mt-2">
-                                    <div class="col-1">
-                                        <p>1</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>malik456</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>Abdullah Malik</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>03212232323</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>23 Apr 2024 01:32 pm</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="d-flex justify-content-between mt-2">
-                                    <div class="col-1">
-                                        <p>2</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>malik456</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>Abdullah Malik</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>03212232323</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>23 Apr 2024 01:32 pm</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="d-flex justify-content-between mt-2">
-                                    <div class="col-1">
-                                        <p>3</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>malik456</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>Abdullah Malik</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>03212232323</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>23 Apr 2024 01:32 pm</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="heading4">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#basicAccordionCollapse4" aria-expanded="false"
-                            aria-controls="basicAccordionCollapse4">
-                        <div class="container">
-                            <div class="row">
-                                <div class="d-flex justify-content-between">
-                                    <div class="col-3">
-                                        <p>A+</p>
-                                    </div>
-                                    <div class="col-3">
-                                        <p>12-12-2021</p>
-                                    </div>
-                                    <div class="col-3 ps-3">
-                                        <p>0311-2323432</p>
-                                    </div>
-                                    <div class="col-3 action-class">
-                                        <a href="#" class="btn-design-outline">Edit</a>
-                                        <a href="#" class="btn-design-fill">Delete</a>
-                                        <span class="position-absolute top-50 start-100 translate-middle badge border border-light rounded-circle bg-danger p-1 ps-2 pe-2">
-                                            <span class="visually-hidden">unread messages</span>3
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
 
-                        </div>
-                    </button>
-                </h2>
-                <div id="basicAccordionCollapse4" class="accordion-collapse collapse" aria-labelledby="heading4"
-                     data-bs-parent="#basicAccordion">
-                    <div class="accordion-body">
-                        <div class="container">
-                            <div class="row">
-                                <div class="d-flex justify-content-between mt-2">
-                                    <div class="col-1">
-                                        <h4>#</h4>
-                                    </div>
-                                    <div class="col">
-                                        <h4>Username</h4>
-                                    </div>
-                                    <div class="col">
-                                        <h4>Name</h4>
-                                    </div>
-                                    <div class="col">
-                                        <h4>Contact No.</h4>
-                                    </div>
-                                    <div class="col">
-                                        <h4>Time</h4>
+                                        <form method="post" action="/Request/Delete" class="d-flex ps-3 justify-content-center">
+
+                                            <input name="reqId" class="d-none" value="@request.Id" />
+                                            <input type="submit" class="btn btn-design-fill" value="Delete" />
+                                        </form>
+
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="d-flex justify-content-between mt-2">
-                                    <div class="col-1">
-                                        <p>1</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>malik456</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>Abdullah Malik</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>03212232323</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>23 Apr 2024 01:32 pm</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="d-flex justify-content-between mt-2">
-                                    <div class="col-1">
-                                        <p>2</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>malik456</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>Abdullah Malik</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>03212232323</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>23 Apr 2024 01:32 pm</p>
+                        </button>
+                    </h2>
+                   
+                    <div id="basicAccordionCollapse{@request.Id}" class="accordion-collapse collapse" aria-labelledby="heading{@request.Id}"
+                         data-bs-parent="#basicAccordion">
+                        <div class="accordion-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="d-flex justify-content-between mt-2">
+                                        <div class="col-1">
+                                            <h4>#</h4>
+                                        </div>
+ 
+                                        <div class="col">
+                                            <h4>Name</h4>
+                                        </div>
+                                        <div class="col">
+                                            <h4>Contact No.</h4>
+                                        </div>
+                                        <div class="col">
+                                            <h4>Time</h4>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="d-flex justify-content-between mt-2">
-                                    <div class="col-1">
-                                        <p>3</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>malik456</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>Abdullah Malik</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>03212232323</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>23 Apr 2024 01:32 pm</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="heading5">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#basicAccordionCollapse5" aria-expanded="false"
-                            aria-controls="basicAccordionCollapse5">
-                        <div class="container">
-                            <div class="row">
-                                <div class="d-flex justify-content-between">
-                                    <div class="col-3">
-                                        <p>B+</p>
-                                    </div>
-                                    <div class="col-3">
-                                        <p>12-12-2021</p>
-                                    </div>
-                                    <div class="col-3 ps-3">
-                                        <p>0311-2323432</p>
-                                    </div>
-                                    <div class="col-3 action-class">
-                                        <a href="#" class="btn-design-outline">Edit</a>
-                                        <a href="#" class="btn-design-fill">Delete</a>
-                                        <span class="position-absolute top-50 start-100 translate-middle badge border border-light rounded-circle bg-danger p-1 ps-2 pe-2">
-                                            <span class="visually-hidden">unread messages</span>3
-                                        </span>
+                        @foreach(var donors in Model.BloodDonors.ElementAt(idx))
+                                {
+                                    count++;
+                                    dateTimeIdx++;
+                                    <div class="row">
+                                    <div class="d-flex justify-content-between align-items-center mt-2">
+                                        <div class="col-1">
+                                            <p>@count</p>
+                                        </div>
+
+                                        <div class="col d-flex gap-4 align-items-center">
+                                                <img id="previewImage" src="@(donors.ImgUrl)" alt="Alternate Text" width="30px" height="30px" class="rounded-circle shadow-4" />
+                                            <p>@donors.Name</p>
+                                        </div>
+                                        <div class="col">
+                                            <p>@donors.PhoneNumber</p>
+                                        </div>
+                                        <div class="col">
+                                                @if (dateTimeIdx >= 0 && dateTimeIdx < Model.DateTimes.Count)
+                                                {
+                                                    <p>@Model.DateTimes[dateTimeIdx]</p>
+                                                }
+                                        
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </button>
-                </h2>
-                <div id="basicAccordionCollapse5" class="accordion-collapse collapse" aria-labelledby="heading5"
-                     data-bs-parent="#basicAccordion">
-                    <div class="accordion-body">
-                        <div class="container">
-                            <div class="row">
-                                <div class="d-flex justify-content-between mt-2">
-                                    <div class="col-1">
-                                        <h4>#</h4>
-                                    </div>
-                                    <div class="col">
-                                        <h4>Username</h4>
-                                    </div>
-                                    <div class="col">
-                                        <h4>Name</h4>
-                                    </div>
-                                    <div class="col">
-                                        <h4>Contact No.</h4>
-                                    </div>
-                                    <div class="col">
-                                        <h4>Time</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="d-flex justify-content-between mt-2">
-                                    <div class="col-1">
-                                        <p>1</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>malik456</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>Abdullah Malik</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>03212232323</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>23 Apr 2024 01:32 pm</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="d-flex justify-content-between mt-2">
-                                    <div class="col-1">
-                                        <p>2</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>malik456</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>Abdullah Malik</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>03212232323</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>23 Apr 2024 01:32 pm</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="d-flex justify-content-between mt-2">
-                                    <div class="col-1">
-                                        <p>3</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>malik456</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>Abdullah Malik</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>03212232323</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>23 Apr 2024 01:32 pm</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <!-- We will contatenate requestid into id below at the end to separate it -->
-                <h2 class="accordion-header" id="heading6">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#basicAccordionCollapse6" aria-expanded="false"
-                            aria-controls="basicAccordionCollapse6">
-                        <div class="container">
-                            <div class="row">
-                                <div class="d-flex justify-content-between">
-                                    <div class="col-3">
-                                        <p>AB+</p>
-                                    </div>
-                                    <div class="col-3">
-                                        <p>12-12-2021</p>
-                                    </div>
-                                    <div class="col-3 ps-3">
-                                        <p>0311-2323432</p>
-                                    </div>
-                                    <div class="col-3 action-class">
-                                        <a href="#" class="btn-design-outline">Edit</a>
-                                        <a href="#" class="btn-design-fill">Delete</a>
-                                        <span class="position-absolute top-50 start-100 translate-middle badge border border-light rounded-circle bg-danger p-1 ps-2 pe-2">
-                                            <span class="visually-hidden">unread messages</span>3
-                                        </span>
-                                    </div>
-                                </div>
+                        
+                            }
 
                             </div>
                         </div>
-                    </button>
-                </h2>
-                <div id="basicAccordionCollapse6" class="accordion-collapse collapse" aria-labelledby="heading6"
-                     data-bs-parent="#basicAccordion">
-                    <div class="accordion-body">
-                        <div class="container">
-                            <div class="row">
-                                <div class="d-flex justify-content-between mt-2">
-                                    <div class="col-1">
-                                        <h4>#</h4>
-                                    </div>
-                                    <div class="col">
-                                        <h4>Username</h4>
-                                    </div>
-                                    <div class="col">
-                                        <h4>Name</h4>
-                                    </div>
-                                    <div class="col">
-                                        <h4>Contact No.</h4>
-                                    </div>
-                                    <div class="col">
-                                        <h4>Time</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="d-flex justify-content-between mt-2">
-                                    <div class="col-1">
-                                        <p>1</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>malik456</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>Abdullah Malik</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>03212232323</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>23 Apr 2024 01:32 pm</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="d-flex justify-content-between mt-2">
-                                    <div class="col-1">
-                                        <p>2</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>malik456</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>Abdullah Malik</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>03212232323</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>23 Apr 2024 01:32 pm</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="d-flex justify-content-between mt-2">
-                                    <div class="col-1">
-                                        <p>3</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>malik456</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>Abdullah Malik</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>03212232323</p>
-                                    </div>
-                                    <div class="col">
-                                        <p>23 Apr 2024 01:32 pm</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
-            </div>
+            }
+
         </div>
     </div>
 </section>
+
+
+

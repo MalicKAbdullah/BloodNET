@@ -1,4 +1,36 @@
-﻿
+﻿.animate-word {
+    display: inline-block;
+    animation: changeWord 10s infinite;
+}
+
+@keyframes changeWord {
+    0% {
+        content: "Lives";
+    }
+
+    20% {
+        content: "Humanity";
+    }
+
+    40% {
+        content: "Hope";
+    }
+
+    60% {
+        content: "Future";
+    }
+
+    80% {
+        content: "Generations";
+    }
+
+    100% {
+        content: "Lives";
+    }
+}
+
+
+
 .slide-in-right{
     animation:slide-in-right linear;
     animation-timeline: view();
