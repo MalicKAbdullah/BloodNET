@@ -1,3 +1,4 @@
+using BloodNET_Web.Controllers;
 using BloodNET_Web.Data;
 using BloodNET_Web.Models;
 using Microsoft.AspNetCore.Components.Forms;
@@ -23,6 +24,12 @@ builder.Services.AddAuthorization(options => {
 
 builder.Services.AddControllersWithViews();
 
+// Register DonorController for dependency injection
+builder.Services.AddTransient<DonorController>();
+
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession();
+
 var app = builder.Build();
 
 
@@ -38,6 +45,8 @@ else
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseSession();
 
 app.UseAuthorization();
 

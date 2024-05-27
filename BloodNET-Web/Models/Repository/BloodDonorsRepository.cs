@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
@@ -38,7 +39,7 @@ namespace BloodNET_Web.Models.Repository
             sqlConnection.Close();
         }
 
-        public BloodDonors GetDonorById(string id)
+        public static BloodDonors GetDonorById(string id)
         {
             SqlConnection sqlConnection = new SqlConnection(connectionstring);
             string selectQuery = "SELECT * FROM BloodDonors where Donorid = @uid";
@@ -50,8 +51,10 @@ namespace BloodNET_Web.Models.Repository
             BloodDonors bloodDonor = new BloodDonors();
 
             SqlDataReader sqlDataReader = selectCommand.ExecuteReader();
+            bool check = false; //Profile is complete or not
             while (sqlDataReader.Read())
             {
+                check = true;
                 bloodDonor.DonorId = sqlDataReader["donorId"].ToString();
                 bloodDonor.Name = sqlDataReader["name"].ToString();
                 bloodDonor.DOB = DateTime.Parse(sqlDataReader["dob"].ToString());
@@ -69,7 +72,11 @@ namespace BloodNET_Web.Models.Repository
             }
 
             sqlConnection.Close();
-            return bloodDonor;
+
+            if (check == true)
+                return bloodDonor;
+            else
+                return null;
         }
 
         public static List<BloodDonors> GetDonorsById(List<string>ls)

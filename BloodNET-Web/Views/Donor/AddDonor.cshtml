@@ -6,7 +6,7 @@
             <div class="col">
                 <h2 class="pb-2 text-start">Donor Details</h2>
                 <div class="container donor-container">
-                    <form id="donor-form" method="post" action="/Donor/AddDonor" enctype="multipart/form-data">
+                    <form id="donor-form" method="post" action="/Donor/Add" enctype="multipart/form-data">
                         <fieldset>
                             <legend>Personal Information</legend>
                             <div class="row">
@@ -56,9 +56,12 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label name="Image"></label>
-                                   
-                               <input type="file" name="Image" value="" />
+
+                                <label name="Image">Upload Profile Picture</label>
+
+  
+                                <input type="file" id="imageUpload" name="Image" required />
+
                             </div>
                         </fieldset>
          

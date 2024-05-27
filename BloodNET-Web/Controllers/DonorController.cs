@@ -29,7 +29,6 @@ namespace BloodNET_Web.Controllers
 
         public IActionResult Index()
         {
-
             return View();
         }
         public string getImageUrl(IFormFile picture)
@@ -73,22 +72,13 @@ namespace BloodNET_Web.Controllers
             return check;
         }
 
-
         public IActionResult AddDonor()
         {
-
             return View();
         }
 
-        public DonorController()
-        {
-
-        }
-
-        
-
         [HttpPost]
-        public IActionResult AddDonor(BloodDonors bloodDonors)
+        public IActionResult Add(BloodDonors bloodDonors)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             bloodDonors.DonorId = userId;

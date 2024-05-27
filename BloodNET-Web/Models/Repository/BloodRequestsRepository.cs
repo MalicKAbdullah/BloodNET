@@ -1,4 +1,6 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using Dapper;
+using Microsoft.CodeAnalysis.Elfie.Serialization;
+using Microsoft.Data.SqlClient;
 
 namespace BloodNET_Web.Models.Repository
 {
@@ -27,6 +29,17 @@ namespace BloodNET_Web.Models.Repository
             sqlConnection.Close();
         }
 
+        public List<BloodRequests> SearchByType(string type)
+        {
+            using (SqlConnection sqlConnection = new SqlConnection(connectionstring))
+            {
+                string searchQuery = "SELECT * FROM BloodRequests WHERE BloodGroup = @type";
+                sqlConnection.Open();
+
+                return sqlConnection.Query<BloodRequests>(searchQuery, new { type }).ToList();
+            }
+        }
+
         public void Update(BloodRequests bloodRequests)
         {
 
@@ -35,6 +48,28 @@ namespace BloodNET_Web.Models.Repository
         public void Delete(BloodRequests bloodRequests)
         {
 
+        }
+
+        public BloodRequests GetbyId(int rid)
+        {
+            SqlConnection sqlConnection = new SqlConnection(connectionstring);
+            string selectQuery = "SELECT * FROM BloodRequests where id = @uid";
+
+            sqlConnection.Open();
+            SqlCommand selectCommand = new SqlCommand(selectQuery, sqlConnection);
+            selectCommand.Parameters.AddWithValue("uid", rid);
+
+            BloodRequests bloodRequest = new BloodRequests();
+
+            SqlDataReader sqlDataReader = selectCommand.ExecuteReader();
+            while (sqlDataReader.Read())
+            {
+
+               bloodRequest = new BloodRequests(int.Parse(sqlDataReader["id"].ToString()), sqlDataReader["bloodgroup"].ToString(), DateTime.Parse(sqlDataReader["datetime"].ToString()), sqlDataReader["recipientname"].ToString(), sqlDataReader["recipientphone"].ToString(), sqlDataReader["Location"].ToString(), sqlDataReader["description"].ToString(), sqlDataReader["userId"].ToString());
+            }
+
+            sqlConnection.Close();
+            return bloodRequest;
         }
         public List<BloodRequests> Get(string id)
         {
@@ -79,6 +114,20 @@ namespace BloodNET_Web.Models.Repository
             return bloodRequests;
         }
 
+        public void availibleRequests(List<BloodRequests> bloodRequests, List<(string donorId,int reqId)> donations)
+        {
+            foreach (var item in donations)
+            {
+                var itemToRemove = bloodRequests.SingleOrDefault(r => r.Id == item.reqId);
+                if (itemToRemove != null)
+                    bloodRequests.Remove(itemToRemove);
+            }
+
+            foreach (var item in bloodRequests)
+            {
+                Console.WriteLine(item.Id);
+            }
+        }
 
 
     }

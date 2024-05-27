@@ -1,8 +1,14 @@
 ﻿@page
 @model ConfirmEmailModel
 @{
-    ViewData["Title"] = "Confirm email";
+    ViewData["Title"] = "Account Created";
 }
 
-<h1>@ViewData["Title"]</h1>
-<partial name="_StatusMessage" model="Model.StatusMessage" />
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;">
+    <img src="/img/svg/email-confirmation.svg" alt="Confirmation Icon" style="width: 100px; height: 100px; margin-bottom: 20px;" />
+@*     <h1 style="margin-top: 0;">@ViewData["Title"]</h1> *@
+    <partial name="_StatusMessage" model="Model.StatusMessage" />
+    <p>
+        <a asp-page="/Account/Login" style="text-decoration: none; color: #337ab7;">Login Now</a>
+    </p>
+</div>

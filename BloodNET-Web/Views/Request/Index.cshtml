@@ -15,22 +15,45 @@
                 <hr>
             </div>
 
-            <div class="d-flex justify-content-between">
-                <div class="col-2">
-                    <h3>Blood Group</h3>
+
+            @if(Model.BloodRequests.Count==0)
+            {
+                <div style="display: flex; justify-content: center; align-items: center; height: 51vh;">
+                    <div style="border: 1px solid #ccc; border-radius: 10px; padding: 20px 70px; text-align: center;">
+                        <img src="/img/svg/not-found.svg" alt="Ineligible Icon" style="width: 200px; height: 200px;" />
+                        <h3>You have no blood requests yet.</h3>
+                 
+                            <a href="@Url.Action("SubmitRequest","Request")" style="color: var(--clr-red); text-decoration: none; font-size:16px">Submit a new request</a>
+
+                    </div>
                 </div>
-                <div class="col-5 col-md-4">
-                    <h3 class="ps-5">Date</h3>
+            }
+
+            else
+            {
+
+                <div class="d-flex justify-content-between">
+                    <div class="col-2">
+                        <h3>Blood Group</h3>
+                    </div>
+                    <div class="col-5 col-md-4">
+                        <h3 class="ps-5">Date</h3>
+                    </div>
+                    <div class="col-5 col-md-4 ps-4 ps-md-0">
+                        <h3>Contact</h3>
+                    </div>
+                    <div class="col-2 d-none d-md-block">
+                        <h3>Actions</h3>
+                    </div>
                 </div>
-                <div class="col-5 col-md-4 ps-4 ps-md-0">
-                    <h3>Contact</h3>
-                </div>
-                <div class="col-2 d-none d-md-block">
-                    <h3>Actions</h3>
-                </div>
-            </div>
+            }
+
+
         </div>
     </div>
+
+    @if(Model.BloodRequests.Count!=0)
+    {   
     <div class="container">
         <div class="accordion w-100" id="basicAccordion">
          
@@ -86,10 +109,24 @@
                             </div>
                         </button>
                     </h2>
-                   
+
+                       
+
+                        
                     <div id="basicAccordionCollapse{@request.Id}" class="accordion-collapse collapse" aria-labelledby="heading{@request.Id}"
                          data-bs-parent="#basicAccordion">
                         <div class="accordion-body">
+                                @if (Model.BloodDonors.ElementAt(idx).Count == 0)
+                                {
+                                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                        <img src="/img/svg/uneligible.svg" alt="Ineligible Icon" style="width: 100px; height: 100px; margin-bottom: 20px;" />
+                                        <h3>No Respondands Yet!</h3>
+
+                                        <p> <a href="@Url.Action("SubmitRequest","Request")" style="text-decoration: none; color:var(--clr-red); font-size:16px;">Submit a new Blood Request</a> </p>
+                                    </div>
+                                }
+                                else
+                                {
                             <div class="container">
                                 <div class="row">
                                     <div class="d-flex justify-content-between mt-2">
@@ -138,13 +175,17 @@
                             }
 
                             </div>
+                                }
                         </div>
+                               
                     </div>
+                        
                 </div>
             }
 
         </div>
     </div>
+    }
 </section>
 
 

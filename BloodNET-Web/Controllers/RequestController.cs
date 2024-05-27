@@ -69,7 +69,7 @@ namespace BloodNET_Web.Controllers
 
             bloodRequestsRepository.Add(bloodRequests);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Request");
 
         }
 
@@ -81,6 +81,7 @@ namespace BloodNET_Web.Controllers
             repository.Delete(reqId);
             return RedirectToAction("Index", "Request");
         }
+
 
 
         //[HttpPost]
