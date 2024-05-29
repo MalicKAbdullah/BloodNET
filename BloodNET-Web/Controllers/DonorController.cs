@@ -65,7 +65,7 @@ namespace BloodNET_Web.Controllers
             SqlDataReader sqlDataReader = selectCommand.ExecuteReader();
             while (sqlDataReader.Read())
             { 
-                check = int.Parse(sqlDataReader["ismedicalfit"].ToString());
+                check = int.Parse(sqlDataReader["DonorStatus"].ToString());
             }
 
             sqlConnection.Close();

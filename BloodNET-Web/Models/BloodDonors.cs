@@ -25,7 +25,7 @@
 
         public string MedicalHistory {  get; set; }
 
-        public int isMedicalFit { get; set; }
+        public int DonorStatus { get; set; }
 
         public IFormFile Image { get; set; }
 
@@ -43,7 +43,7 @@
             City = "---";
             Country = "---";
             MedicalHistory = "---";
-            isMedicalFit = 0;
+            DonorStatus = 1;
 
         }
 
@@ -67,7 +67,7 @@
             this.Country = bloodDonors.Country;
             this.City = bloodDonors.City;
             this.MedicalHistory = bloodDonors.MedicalHistory;
-            this.isMedicalFit = bloodDonors.isMedicalFit;
+            this.DonorStatus = bloodDonors.DonorStatus;
             this.ImgUrl = bloodDonors.ImgUrl;
         }
 

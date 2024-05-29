@@ -119,7 +119,7 @@
                                 @if (Model.BloodDonors.ElementAt(idx).Count == 0)
                                 {
                                     <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                                        <img src="/img/svg/uneligible.svg" alt="Ineligible Icon" style="width: 100px; height: 100px; margin-bottom: 20px;" />
+                                        <img src="/img/svg/uneligible.svg" alt="Ineligible Icon" class="img-fluid" style="width: 100px; height: 100px; margin-bottom: 20px;" />
                                         <h3>No Respondands Yet!</h3>
 
                                         <p> <a href="@Url.Action("SubmitRequest","Request")" style="text-decoration: none; color:var(--clr-red); font-size:16px;">Submit a new Blood Request</a> </p>
@@ -162,11 +162,13 @@
                                         <div class="col">
                                             <p>@donors.PhoneNumber</p>
                                         </div>
-                                        <div class="col">
+                                        <div class="col d-flex justify-content-between" style="flex-wrap:wrap;">
                                                 @if (dateTimeIdx >= 0 && dateTimeIdx < Model.DateTimes.Count)
                                                 {
                                                     <p>@Model.DateTimes[dateTimeIdx]</p>
                                                 }
+
+                                                <button class="btn btn-outline-danger">Accept</button>
                                         
                                         </div>
                                     </div>

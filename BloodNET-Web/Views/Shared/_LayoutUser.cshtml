@@ -101,7 +101,7 @@
                             <li><hr class="dropdown-divider"></li>
 
                             <li class="dropdown-item"> <a  href="@Url.Action("Index","User")">View Profile</a></li>
-                            <li class="dropdown-item"> <a href="@Url.Action("AddDonor","Donor")">Update Profile</a></li>
+                            <li class="dropdown-item"> <a asp-area="Identity" asp-page="/Account/Manage/Index">Settings</a></li>
                             <li class="dropdown-item">    <a  href="@Url.Action("Index","Request")">Your Requests</a></li>
                             <li class="dropdown-item"> <a  href="@Url.Action("SubmitRequest","Request")">Request For Blood</a></li>
                             <li><hr class="dropdown-divider"></li>

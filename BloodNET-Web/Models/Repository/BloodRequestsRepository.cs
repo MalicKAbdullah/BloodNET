@@ -123,10 +123,6 @@ namespace BloodNET_Web.Models.Repository
                     bloodRequests.Remove(itemToRemove);
             }
 
-            foreach (var item in bloodRequests)
-            {
-                Console.WriteLine(item.Id);
-            }
         }
 
 

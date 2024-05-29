@@ -36,6 +36,8 @@ namespace BloodNET_Web.Controllers
             {
                 ViewBag.message = "Your Donor Profile is Incomplete";
                 ViewBag.cta = "Complete your Profile";
+                ViewBag.action = "AddDonor";
+                ViewBag.controller = "Donor";
                 return View("NotEligible");
             }
 

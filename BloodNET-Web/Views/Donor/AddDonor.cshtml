@@ -14,9 +14,14 @@
                                     <label for="d-name">Name</label>
                                     <input type="text" id="d-name" placeholder=" @MyUsers.GetNameandEmail(User.FindFirst(ClaimTypes.NameIdentifier)?.Value).name" name="Name" value=" @MyUsers.GetNameandEmail(User.FindFirst(ClaimTypes.NameIdentifier)?.Value).name" disabled>
                                 </div>
-                                <div class="col-6 col-sm-6 col-md-4 col-lg-2">
+@*                                 <div class="col-6 col-sm-6 col-md-4 col-lg-2">
                                     <label for="d-age">Date of Birth</label>
                                     <input type="date" id="d-age" placeholder="Enter Age" name="DOB" required>
+                                </div> *@
+                                <div class="col-6 col-sm-6 col-md-4 col-lg-2">
+                                    <label for="dateOfBirth">Date of Birth</label>
+                                    <input type="date" id="dateOfBirth" placeholder="Enter Age" name="DOB" required>
+                                    <span id="ageError" class="error-message"></span>
                                 </div>
                                 <div class="col-6 col-sm-6 col-md-4 col-lg-2">
                                     <label for="d-gender">Gender</label>
@@ -102,18 +107,6 @@
                                               style="height: 100px;"  ></textarea>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="d-flex ">
-                                <label class="me-3">Are you medically fit?</label>
-
-                                    <label >   <input type="radio" name="isMedicalFit" value="1" class="me-2"></label>
-                                    <label class="me-3">Yes</label>
-
-                                    <label>   <input type="radio" name="isMedicalFit" value="0" class="me-2"></label>
-                                    <label>No</label>
-
-                                </div>
-                            </div>
                         </fieldset>
 
 @*                         <div class="row checkbox-content">
@@ -143,3 +136,35 @@
         </div>
     </div>
 </section>
+
+@section myjs{
+    <script>
+        // Get the date of birth input field
+        const dateOfBirthInput = document.getElementById('dateOfBirth');
+        const ageErrorSpan = document.getElementById('ageError');
+
+        // Add an event listener to the date of birth input field
+        dateOfBirthInput.addEventListener('input', validateAge);
+
+        function validateAge() {
+            const dateOfBirth = new Date(dateOfBirthInput.value);
+            const today = new Date();
+            const age = today.getFullYear() - dateOfBirth.getFullYear();
+            const monthDiff = today.getMonth() - dateOfBirth.getMonth();
+
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dateOfBirth.getDate())) {
+                age--;
+            }
+
+            if (age < 18) {
+                ageErrorSpan.textContent = 'You must be at least 18 years old to proceed.';
+                ageErrorSpan.style.color = 'var(--clr-red)';
+       
+                dateOfBirthInput.setCustomValidity('You must be at least 18 years old.');
+            } else {
+                ageErrorSpan.textContent = '';
+                dateOfBirthInput.setCustomValidity('');
+            }
+        }
+    </script>
+}                               

@@ -7,8 +7,8 @@
          style="background: url(/img/right-image.jpg) no-repeat center; background-size: cover; width: 100%;">
         <form id="donor-form" method="post">
             <div class="row">
-                <div class="col-6 col-sm-6 col-md-4 col-lg-2">
-                    <label for="d-blood-group">Blood Group Required</label>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <label for="d-blood-group">Blood Group </label>
                     <select id="d-blood-group" name="bloodgroup" required>
                         <option value="" disabled selected>Select Group</option>
                         <option value="A+">A+</option>
@@ -22,8 +22,8 @@
                     </select>
                 </div>
                 <div class="col-md-6 col-lg-3">
-                    <label for="d-time">Date & Time</label>
-                    <input type="datetime-local" id="d-age" name="dtime" placeholder="Enter Date & Time" required>
+                    <label for="dateTimeInput">Date & Time</label>
+                    <input type="datetime-local" id="dateTimeInput" min="" max="" name="dtime" placeholder="Enter Date & Time" required>
                 </div>
                 <div class="row">
 
@@ -62,5 +62,38 @@
         </form>
     </div>
 </section>
+
+@section css{
+    <style>
+        /* Target the calendar icon */
+        ::-webkit-calendar-picker-indicator {
+            filter: invert(23%) sepia(50%) saturate(7450%) hue-rotate(346deg) brightness(96%) contrast(103%);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor:pointer;
+         /* Red color */
+        }
+
+    </style>
+
+}
+
+@section myjs{
+    <script>
+        // Get the datetime input field
+        const dateTimeInput = document.getElementById('dateTimeInput');
+
+        // Calculate the maximum date allowed (7 days from now)
+        const maxDate = new Date();
+        maxDate.setDate(maxDate.getDate() + 7);
+        const maxDateISO = maxDate.toISOString().slice(0, 16);
+
+        // Set the minimum date to today and maximum date to 7 days from now
+        const today = new Date().toISOString().slice(0, 16);
+        dateTimeInput.min = today;
+        dateTimeInput.max = maxDateISO;
+    </script>
+}
 
 

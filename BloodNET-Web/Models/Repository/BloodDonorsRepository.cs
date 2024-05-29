@@ -14,7 +14,7 @@ namespace BloodNET_Web.Models.Repository
         public void Add(BloodDonors bloodDonors,(string name,string email) var)
         {
             SqlConnection sqlConnection = new SqlConnection(connectionstring);
-            string insertQuery = "INSERT INTO BloodDonors(DonorId, Name, DOB, Gender, Weight, WeightUnit, BloodGroup, PhoneNumber, Email, Address, City, Country, MedicalHistory, isMedicalFit,imgUrl) VALUES(@donorId, @name, @dob, @gender, @weight, @weightUnit, @bloodGroup, @phoneNumber, @email, @address, @city, @country, @MedicalHistory, @isMedicalFit,@imgurl)";
+            string insertQuery = "INSERT INTO BloodDonors(DonorId, Name, DOB, Gender, Weight, WeightUnit, BloodGroup, PhoneNumber, Email, Address, City, Country, MedicalHistory, DonorStatus,imgUrl) VALUES(@donorId, @name, @dob, @gender, @weight, @weightUnit, @bloodGroup, @phoneNumber, @email, @address, @city, @country, @MedicalHistory, @DonorStatus,@imgurl)";
 
             sqlConnection.Open();
             SqlCommand insertCommand = new SqlCommand(insertQuery, sqlConnection);
@@ -32,7 +32,7 @@ namespace BloodNET_Web.Models.Repository
             insertCommand.Parameters.AddWithValue("country", bloodDonors.Country);
 
             insertCommand.Parameters.AddWithValue("MedicalHistory", bloodDonors.MedicalHistory);
-            insertCommand.Parameters.AddWithValue("isMedicalFit", bloodDonors.isMedicalFit);
+            insertCommand.Parameters.AddWithValue("DonorStatus", bloodDonors.DonorStatus);
             insertCommand.Parameters.AddWithValue("imgUrl", bloodDonors.ImgUrl);
 
             insertCommand.ExecuteNonQuery();
@@ -67,7 +67,7 @@ namespace BloodNET_Web.Models.Repository
                 bloodDonor.City = sqlDataReader["city"].ToString();
                 bloodDonor.Country = sqlDataReader["country"].ToString();
                 bloodDonor.MedicalHistory = sqlDataReader["MedicalHistory"].ToString();
-                bloodDonor.isMedicalFit = int.Parse(sqlDataReader["ismedicalfit"].ToString());
+                bloodDonor.DonorStatus = int.Parse(sqlDataReader["DonorStatus"].ToString());
                 bloodDonor.ImgUrl = sqlDataReader["imgUrl"].ToString();
             }
 
