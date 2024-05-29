@@ -94,7 +94,10 @@
                     <div class="dropdown">
     
                         <button class="btn  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-person-circle" style="font-size:27px;"></i>
+
+                                <img src="/img/svg/person-circle.svg" height="30px" width="30px" class="img-fluid"></img>
+
+
                         </button>
 
                         <ul class="dropdown-menu dropdown-menu-end">
@@ -103,10 +106,26 @@
                             <li class="dropdown-item">                             @MyUsers.GetNameandEmail(User.FindFirst(ClaimTypes.NameIdentifier)?.Value).name </li>
                             <li><hr class="dropdown-divider"></li>
 
-                            <li class="dropdown-item"> <a href="@Url.Action("Index","User")">View Profile</a></li>
-                            <li class="dropdown-item"> <a asp-area ="Identity" asp-page="/Account/Manage/Index">Settings</a></li>
-                            <li class="dropdown-item">    <a href="@Url.Action("Index","Request")">Your Requests</a></li>
-                            <li class="dropdown-item"> <a href="@Url.Action("SubmitRequest","Request")">Request For Blood</a></li>
+                            <li class="dropdown-item">
+                                <a href="@Url.Action("Index","User")">
+                                    <i class="fa fa-user"></i> View Profile
+                                </a>
+                            </li>
+                            <li class="dropdown-item">
+                                <a asp-area="Identity" asp-page="/Account/Manage/Index">
+                                    <i class="fa fa-cog"></i> Settings
+                                </a>
+                            </li>
+                            <li class="dropdown-item">
+                                <a href="@Url.Action("Index","Request")">
+                                    <i class="fa fa-list"></i> Your Requests
+                                </a>
+                            </li>
+                            <li class="dropdown-item">
+                                <a href="@Url.Action("SubmitRequest","Request")">
+                                    <i class="fa fa-plus"></i> Request For Blood
+                                </a>
+                            </li>
                             <li><hr class="dropdown-divider"></li>
                             <li class="dropdown-item">
                                 <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">

@@ -22,6 +22,7 @@ namespace BloodNET_Web.Controllers
 
         public IActionResult Index()
         {
+
             if (User.Identity.IsAuthenticated)
             {
                 TempData["userId"] = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
