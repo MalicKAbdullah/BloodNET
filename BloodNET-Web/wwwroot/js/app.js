@@ -1,9 +1,11 @@
 ﻿function themeToggler() {
-    let table = document.getElementById('realtime-table');
-    table.classList.toggle('table-dark');
+    let body = document.querySelector('body');
+    body.classList.toggle('bg-dark');
+    body.classList.toggle('text-white');
+
     let toggleImg = document.getElementById('themeToggle');
 
-    if (table.classList.contains('table-dark')) {
+    if (body.classList.contains('bg-dark')) {
         toggleImg.src = "/img/svg/toggle-on.svg";
         setCookie('theme', 'dark');
     } else {
@@ -30,10 +32,11 @@ function getCookie(name) {
 window.onload = function () {
     var theme = getCookie('theme');
     if (theme === 'dark') {
-        document.getElementById('realtime-table').classList.add('table-dark');
+        document.querySelector('body').classList.add('bg-dark');
+        document.querySelector('body').classList.add('text-white');
+
         document.getElementById('themeToggle').src = "/img/svg/toggle-on.svg";
     } else if (theme === 'light') {
-        document.getElementById('realtime-table').classList.remove('table-dark');
         document.getElementById('themeToggle').src = "/img/svg/toggle-off.svg";
     }
 };

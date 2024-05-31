@@ -5,6 +5,9 @@
     --clr-light: #f6f6f6;
     --clr-red: #eb0202;
     --clr-gray: #e3e3e3;
+
+    --clr-theme-bg: #2c3034;
+    --clr-theme:white;
 }
 
 * {
@@ -21,9 +24,9 @@
 }
 
 body {
-    /*    font-family: 'Poppins', sans-serif;*/
     font-family: 'BloodNET-Regular', Arial, sans-serif;
-
+/*    background-color: var(--clr-theme-bg);
+    color:var(--clr-theme);*/
 }
 
 .navbar-brand {
@@ -34,7 +37,7 @@ body {
 }
 
 .btn-design-outline {
-    background-color: #ffffff;
+    background-color: var(--clr-light);
     color: var(--clr-red);
     border: 1px groove var(--clr-red);
     font-size: .9411764706rem;
@@ -55,7 +58,7 @@ body {
 }
 
     .btn-design-fill:hover {
-        background-color: #ffffff;
+        background-color: var(--clr-light);
         color: var(--clr-red) !important;
         border: 1px groove var(--clr-red);
         box-shadow: black 2px 4px;
@@ -81,14 +84,12 @@ body {
     }
 
 .nav-link {
-    color: var(--clr-dark);
     font-weight: 400;
     position: relative;
 }
 
     .nav-link.active,
     .nav-link:hover {
-        color: #000000;
         font-weight: 500;
     }
 
@@ -100,8 +101,8 @@ body {
         left: 50%;
         transform: translateX(-50%);
         width: 0;
-        height: 2px;
-        background-color: #eb0202;
+        height: 3px;
+        background-color: var(--clr-red);
         visibility: hidden;
         transition: 0.3s ease-in-out;
     }
@@ -198,7 +199,7 @@ h4 {
 }
 
 p {
-    font-size: 1.25rem;
+    font-size: 1.0rem;
     line-height: 1.4;
     font-weight: 400;
     letter-spacing: normal;
@@ -229,42 +230,8 @@ p {
     padding: 30px 10%;
 }
 
-/*.testimonials-section {
-    background-color: #ffffff;
-    background-image: linear-gradient(90deg, #ffffff 0%, #ffffff 33%, #e8e8e8 66%, #b7b7b7 100%);
-    min-height: 60vh;
-}
-
-    .testimonials-section .card {
-        margin: 20px;
-        height: auto;
-    }
-
-    .testimonials-section img {
-        height: 150px;
-        width: 150px;
-        border-radius: 50%;
-        border: 5px solid var(--clr-red);
-        align-self: center;
-        margin-top: 20px;
-        margin-bottom: 15px;
-    }
-
-    .testimonials-section h3 {
-        font-size: 22px;
-        color: var(--clr-red);
-    }
-
-    .testimonials-section p {
-        padding: 5px 10%;
-        font-size: 1.05rem;
-        line-height: 1.4;
-        font-weight: 400;
-        letter-spacing: normal;
-    }
-*/
 .cta-message .container {
-    background: url(/img/cta-bg.jpg) no-repeat center;
+    background: url(/img/cta-bg.png) no-repeat center;
     background-size: cover;
     height: 25vh;
 }
@@ -295,12 +262,12 @@ footer .top-bar i {
         cursor: pointer;
     }
 
-.footer-section a {
+a {
     text-decoration: none;
     color: var(--clr-dark);
 }
 
-    .footer-section a:hover {
+a:hover {
         color: var(--clr-red);
     }
 
@@ -327,7 +294,6 @@ footer .top-bar i {
     width: 100%;
     opacity: 0.9;
 
-    /*background-color: var(--clr-gray);*/
     height: 100vh;
     justify-content: center;
     align-items: center;
@@ -360,11 +326,15 @@ footer .top-bar i {
             color:var(--clr-light) !important;
         }
 
-        .login-form .container label,
-        p,
-        a {
-            font-size: 16px;
-        }
+.login-form label,
+.login-form p{
+    font-size: 16px;
+    color: var(--clr-dark);
+}
+
+.login-form a{
+    font-size:16px;
+}
 
 .input-container:focus-within {
     border-bottom: 2px solid var(--clr-red) !important;
@@ -381,7 +351,7 @@ footer .top-bar i {
 
 
     .contact-form .container input,
-    textarea {
+    .contact-form .container textarea {
         width: 100%;
         padding: 10px;
         margin-top: 5px;
@@ -390,27 +360,18 @@ footer .top-bar i {
     }
 
         .contact-form .container input:focus,
-        select:focus,
-        textarea:focus {
+        .contact-form .container select:focus,
+        .contact-form .container textarea:focus {
             outline: none;
             box-shadow: none;
             border: 2px solid var(--clr-red);
         }
 
     .contact-form .container label,
-    a {
+    .contact-form .container a {
         font-size: 14px;
     }
 
-
-    .contact-form a {
-        text-decoration: none;
-        color: var(--clr-dark);
-    }
-
-        .contact-form a:hover {
-            color: var(--clr-red);
-        }
 /*
     .contact-form h2 {
         font-size: 24px;
@@ -464,7 +425,7 @@ footer .top-bar i {
 
 .donor-container,
 .contact-form .container {
-    background-color: #ffffff;
+    background-color: var(--clr-light);
     border-radius: 10px;
     padding: 30px;
     border: 1px solid var(--clr-gray);
@@ -500,7 +461,7 @@ footer .top-bar i {
 
     .donor-container button {
         background-color: var(--clr-red);
-        color: #ffffff;
+        color: var(--clr-light);
         border: none;
         padding: 10px 20px;
         border-radius: 5px;
@@ -555,7 +516,7 @@ textarea:focus {
 }
 
 .find-donors-section {
-    background: url(~img/right-image.jpg) no-repeat center;
+    background: url(~img/right-image.png) no-repeat center;
     background-size: cover;
     width: 100%;
 }
@@ -564,7 +525,7 @@ textarea:focus {
         height: 100vh;
     }
 
-.submitted-information,
+.submitted-information
 .user-requests,
 .realtime-requests {
     padding: 30px 0;
@@ -645,10 +606,6 @@ textarea:focus {
     animation-direction: alternate;
     animation-timing-function: linear;
     width: 290px;
-    /* height: 168px;
-            border-radius: 12px;
-            background: #f2f2f2;
-            padding: 1rem; */
     margin: 1rem;
 }
 

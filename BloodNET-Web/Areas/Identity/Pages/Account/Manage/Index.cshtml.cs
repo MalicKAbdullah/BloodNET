@@ -32,6 +32,8 @@ namespace BloodNET_Web.Areas.Identity.Pages.Account.Manage
         /// </summary>
         public string Username { get; set; }
 
+
+
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
@@ -58,7 +60,8 @@ namespace BloodNET_Web.Areas.Identity.Pages.Account.Manage
             /// </summary>
             [Phone]
             [Display(Name = "Phone number")]
-            public string PhoneNumber { get; set; }
+            public string PhoneNumber { get; set; }            
+
         }
 
         private async Task LoadAsync(MyUsers user)
@@ -70,7 +73,7 @@ namespace BloodNET_Web.Areas.Identity.Pages.Account.Manage
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber             
             };
         }
 
