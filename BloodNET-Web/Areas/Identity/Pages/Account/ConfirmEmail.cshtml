@@ -1,14 +1,18 @@
 ﻿@page
+@{
+    Layout = "/Views/Shared/_NoLayout.cshtml";
+}
+
 @model ConfirmEmailModel
 @{
     ViewData["Title"] = "Account Created";
 }
 
 <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;">
-    <img src="/img/svg/email-confirmation.svg" alt="Confirmation Icon" style="width: 100px; height: 100px; margin-bottom: 20px;" />
+    <img src="/img/svg/email-confirmation.svg" alt="Confirmation Icon" style="width: 200px; height: 200px; margin-bottom: 20px;" />
 @*     <h1 style="margin-top: 0;">@ViewData["Title"]</h1> *@
     <partial name="_StatusMessage" model="Model.StatusMessage" />
     <p>
-        <a asp-page="/Account/Login" style="text-decoration: none; color: #337ab7;">Login Now</a>
+        <a asp-page="/Account/Login" class="link-clr">Login Now</a>
     </p>
 </div>

@@ -1,8 +1,8 @@
 ﻿<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 83vh;">
     <img src="/img/svg/uneligible.svg" alt="Ineligible Icon" style="width: 100px; height: 100px; margin-bottom: 20px;" />
     <h1 style="margin-top: 0;">We're Sorry</h1>
-    <h3>You Are Currently Ineligible to Donate Blood</h3>
+    <h3>You are Currently Ineligible to Donate Blood</h3>
     <h5>@ViewBag.message</h5>
 
-    <p> <a href="@Url.Action("AddDonor","Donor")" style="text-decoration: none; color:var(--clr-red); font-size:16px;">@ViewBag.cta</a> </p>
+    <p> <a href="@Url.Action("AddDonor","Donor")" style="text-decoration: none; font-size:16px;" class="link-clr">@ViewBag.cta</a> </p>
 </div>

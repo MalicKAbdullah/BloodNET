@@ -36,6 +36,28 @@ namespace BloodNET_Web.Models.Repository
             }
         }
 
+        public void Update(TEntity entity)
+        {
+            var tableName = typeof(TEntity).Name;
+            var primaryKey = "Id";
+            var properties = typeof(TEntity).GetProperties().Where(x => x.Name != primaryKey);
+
+            var setClause = string.Join(",", properties.Select(a => $"{a.Name}=@{a.Name}"));
+
+            var query = $"update {tableName} set {setClause} where {primaryKey}=@{primaryKey} ";
+            using (var connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                var comm = new SqlCommand(query, connection);
+                foreach (var prop in properties)
+                {
+                    comm.Parameters.AddWithValue("@" + prop.Name, prop.GetValue(entity));
+                }
+                comm.ExecuteNonQuery();
+            }
+        }
+
+
         public void Delete(int id)
         {
             var tablename = typeof(TEntity).Name;

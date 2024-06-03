@@ -11,14 +11,23 @@
     .sidebar .nav-link:hover {
         background-color: var(--clr-red);
   
-        color:white;
+        color:white !important;
     }
 
     .sidebar .nav-link::before{
         background-color:transparent;
     }
+
+    .nav-link{
+        color:black;
+    }
+
+    .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+        color: white !important;
+    }
+    
 </style>
-<section class="sidebar">
+<section class="sidebar nav-sidebar">
 <ul class="nav nav-pills flex-column gap-1">
         <li class="nav-item">
             <a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">

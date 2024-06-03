@@ -14,28 +14,39 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>BloodNET</title>
     @RenderSection("css", required: false)
+
+
+
+    <style>
+
+        .dropdown-toggle::after {
+            display: none;
+        }
+
+        .dropdown-menu .btn {
+            padding: 0 0.2rem;
+            border: none;
+        }
+
+        .dropdown-menu a {
+            text-decoration: none;
+            color: var(--clr-dark);
+            font-size: 16px;
+        }
+
+        .dropdown-menu li:active {
+            background-color: var(--clr-light);
+        }
+
+
+        /*     .fa {
+                color: white;
+            }
+         */
+
+    </style>
+
 </head>
-
-<style>
-
-    .dropdown-toggle::after {
-        display: none;
-    }
-    .dropdown-menu .btn{
-        padding: 0 0.2rem;
-        border:none;
-    }
-    .dropdown-menu a{
-        text-decoration:none;
-        color:var(--clr-dark);
-        font-size:16px;
-    }
-
-    .dropdown-menu li:active{
-        background-color: var(--clr-light);
-    }
-
-</style>
 
 <body>
     <header>
@@ -83,25 +94,23 @@
                                 <a class="nav-link" href="@Url.Action("Contact","Home")">Contact</a>
                             </li>
 
-
                         </ul>
                     </div>
                 </div>
 
                 <div>
                     <div class="dropdown">
-                     
+                        <img src="/img/svg/dark-mode-toggle-icon.png" class="me-1" width="30" id="themeToggle" style="cursor:pointer">
+
                         <button class="btn  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 
-                                <img src="/img/svg/person-circle.svg" height="30px" width="30px" class="img-fluid"></img>
-
-
-                            
+                                <img src="/img/svg/person-circle.svg" height="30" width="30" class="img-fluid"></img>
+   
                         </button>
 
-                        <ul class="dropdown-menu dropdown-menu-end">
+                        <ul class="dropdown-menu dropdown-menu-end border">
 
-                            <li class="dropdown-item">                             @MyUsers.GetNameandEmail(User.FindFirst(ClaimTypes.NameIdentifier)?.Value).name </li>
+                            <li class="ms-3">                             @MyUsers.GetNameandEmail(User.FindFirst(ClaimTypes.NameIdentifier)?.Value).name </li>
                             <li><hr class="dropdown-divider"></li>
                             
                             <li class="dropdown-item">
@@ -126,7 +135,7 @@
                             </li>
                             <li><hr class="dropdown-divider"></li>
                             <li class="dropdown-item">
-                                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post" onclick="return confirm('Are you sure to Log Out?')">
                                     <button type="submit" class=" btn btn-dark text-white p-2" style="background-color:var(--clr-red);">Click here to Logout</button>
                                 </form>
                             </li>
@@ -148,7 +157,9 @@
         @RenderBody()
     </main>
 
-    <footer class=" bg-light">
+
+
+    <footer>
         <div class="top-bar my-5">
             <div class="container-fluid text-white me-5">
                 <div class="row pt-3 px-5">
@@ -204,7 +215,7 @@
                         <div class="d-flex flex-lg-column align-items-md-start align-items-center text-center text-md-start">
                             <div class="col">
                                 <a href="">
-                                    <h3>Privacy</h3>
+                                    <h3 id="link">Privacy</h3>
                                 </a>
                             </div>
                             <div class="col">

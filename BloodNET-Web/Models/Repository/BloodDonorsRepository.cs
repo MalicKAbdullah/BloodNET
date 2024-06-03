@@ -79,6 +79,19 @@ namespace BloodNET_Web.Models.Repository
                 return null;
         }
 
+        public void UpdateStatus(string donorId, int status)
+        {
+
+            var query = $"update BloodDonors set Donorstatus={status}  where donorId = {donorId} ";
+            using (var connection = new SqlConnection(connectionstring))
+            {
+                connection.Open();
+                var comm = new SqlCommand(query, connection);
+
+                comm.ExecuteNonQuery();
+            }
+        }
+
         public static List<BloodDonors> GetDonorsById(List<string>ls)
         {
             SqlConnection sqlConnection = new SqlConnection(connectionstring);

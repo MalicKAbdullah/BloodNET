@@ -13,6 +13,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>BloodNET</title>
     @RenderSection("css",required:false)
+
+@*     <style>
+        .fa {
+            color: white;
+        }
+    </style> *@
 </head>
 
 <body>
@@ -50,17 +56,10 @@
                             <li class="nav-item mx-lg-2">
                                 <a class="nav-link" href="@Url.Action("Contact","Home")">Contact</a>
                             </li>
-
-                            <!-- <li class="nav-item mx-lg-2">
-                                <a class="nav-link" href="#">About</a>
-                            </li> -->
-                            <!-- <li class="nav-item">
-                                <a class="nav-link mx-lg-2" href="contact.html">Contact</a>
-                            </li> -->
                         </ul>
                     </div>
                 </div>
-                <img src="/img/svg/toggle-off.svg" width="30px" id="themeToggle" style="cursor:pointer">
+                <img src="/img/svg/dark-mode-toggle-icon.png" class="me-2" width="30" id="themeToggle" style="cursor:pointer">
                 <a asp-area="Identity" asp-page="/Account/Login" class="btn-design-fill">Login</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -112,21 +111,8 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="d-flex flex-md-column align-items-center text-center">
-                            <div class="col">
-                                <h2>Home</h2>
-                            </div>
-                            <div class="col me-2">
-                                <h3>Donate Blood</h3>
-                            </div>
-                            <div class="col">
-                                <h3>Find Donors</h3>
-                            </div>
+        
 
-
-                        </div>
-                    </div> -->
 
                     <div class="col-lg-4 col-md-6 col-sm-12 pb-3">
                         <div class="col ">

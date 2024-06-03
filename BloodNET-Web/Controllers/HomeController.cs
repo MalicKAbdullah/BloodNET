@@ -71,7 +71,7 @@ namespace BloodNET_Web.Controllers
         public IActionResult Realtime()
         {
             BloodRequestsRepository bloodRequestsRepository = new BloodRequestsRepository();
-            List<BloodRequests> bloodRequests = bloodRequestsRepository.GetAll();
+            List<BloodRequests> bloodRequests = bloodRequestsRepository.GetAllExcept(User.Identity.GetUserId());
 
             //if (HttpContext.Session.GetInt32("ReqId").HasValue)
             //{
@@ -105,11 +105,11 @@ namespace BloodNET_Web.Controllers
 
             if (type == "All")
             {
-                bloodRequests = bloodRequestsRepository.GetAll();
+                bloodRequests = bloodRequestsRepository.GetAllExcept(User.Identity.GetUserId());
             }
             else
             {
-                bloodRequests = bloodRequestsRepository.SearchByType(type);
+                bloodRequests = bloodRequestsRepository.SearchByType(type,User.Identity.GetUserId());
             }
             return View(bloodRequests);
 

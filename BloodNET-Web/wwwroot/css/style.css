@@ -31,7 +31,7 @@ body {
 
 .navbar-brand {
     font-weight: 600;
-    color: var(--clr-red);
+    color: var(--clr-red) !important;
     font-size: 30px;
     transition: 0.3s color;
 }
@@ -242,9 +242,18 @@ footer .top-bar {
     padding-bottom: 10px;
 }
 
+footer .top-bar .fa {
+    color:white !important;
+}
+
+    footer .top-bar .fa:hover {
+        color: red !important;
+    }
+
 .socials a {
     color: inherit;
 }
+
 
 footer .top-bar i {
     padding: 8px;
@@ -268,7 +277,7 @@ a {
 }
 
 a:hover {
-        color: var(--clr-red);
+        color: var(--clr-red) !important;
     }
 
 .footer-section h2 {
@@ -422,10 +431,12 @@ a:hover {
 }
 
    
+.link-clr{
+    color:var(--clr-red) !important;
+}
 
 .donor-container,
 .contact-form .container {
-    background-color: var(--clr-light);
     border-radius: 10px;
     padding: 30px;
     border: 1px solid var(--clr-gray);
@@ -469,6 +480,9 @@ a:hover {
         font-size: 16px;
     }
 
+.hover-color {
+    color: var(--clr-red);
+}
         .donor-container button:hover {
             background-color: inherit;
             color: var(--clr-red);
@@ -542,6 +556,11 @@ textarea:focus {
         margin-bottom: 15px;
 /*        font-size: 16px;
 */    }
+
+
+.card{
+    background:transparent;
+}
 
 .accordion {
     --bs-accordion-btn-focus-box-shadow: none;
@@ -642,3 +661,9 @@ textarea:focus {
     color:var(--clr-red);
 }
 
+
+
+.disabled{
+    background-color:#6b6b6b !important;
+    color:white !important;
+}

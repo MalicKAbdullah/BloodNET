@@ -16,10 +16,29 @@ namespace BloodNET_Web.Controllers
           
             BloodDonors bloodDonor = BloodDonorsRepository.GetDonorById(userId);
 
-            ViewBag.CompleteProfile = bloodDonor != null;   
+            ViewBag.CompleteProfile = bloodDonor != null;
+
+            ViewBag.donorStatus = DonationRepository.getDonorStatus(userId);
 
             return View(bloodDonor);
         }
+
+        //[HttpPost]
+
+        //public void CloseRequest(int reqId, string donorId)
+        //{
+        //    BloodRequestsRepository bloodRequestsRepository = new BloodRequestsRepository();
+        //    bloodRequestsRepository.UpdateStatus(reqId, "False");
+
+        //    BloodDonorsRepository bloodDonorsRepository = new BloodDonorsRepository();
+        //    bloodDonorsRepository.UpdateStatus(donorId, 0);
+
+        //    DonationRepository donationRepository = new DonationRepository();
+        //    int donationId = donationRepository.getDonationId(donorId, reqId);
+
+        //    donationRepository.UpdateStatus(donationId, 1);
+        //}
+
         public IActionResult Login()
         {
             return View();

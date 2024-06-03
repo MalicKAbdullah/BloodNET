@@ -14,30 +14,33 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>BloodNET</title>
     @RenderSection("css", required: false)
+
+    <style>
+
+        .dropdown-toggle::after {
+            display: none;
+        }
+
+        .btn {
+            padding: 0 0.2rem;
+            border: none;
+        }
+
+        .dropdown-menu a {
+            text-decoration: none;
+            color: var(--clr-dark);
+            font-size: 16px;
+        }
+
+            .dropdown-menu li:active{
+                background-color: var(--clr-light);
+        
+            }
+
+    </style>
+
 </head>
 
-<style>
-
-    .dropdown-toggle::after {
-        display: none;
-    }
-
-    .btn {
-        padding: 0 0.2rem;
-        border: none;
-    }
-
-    .dropdown-menu a {
-        text-decoration: none;
-        color: var(--clr-dark);
-        font-size: 16px;
-    }
-
-    .dropdown-menu li:active {
-        background-color: var(--clr-light);
-    }
-
-</style>
 
 <body>
     <header>
@@ -92,43 +95,44 @@
 
                 <div>
                     <div class="dropdown">
-    
+                        <img src="/img/svg/dark-mode-toggle-icon.png" class="me-3" width="30" id="themeToggle" style="cursor:pointer">
+
                         <button class="btn  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 
-                                <img src="/img/svg/person-circle.svg" height="30px" width="30px" class="img-fluid"></img>
+                                <img src="/img/svg/person-circle.svg" height="30" width="30" class="img-fluid"></img>
 
 
                         </button>
 
-                        <ul class="dropdown-menu dropdown-menu-end">
+                        <ul class="dropdown-menu dropdown-menu-end border ">
 
 
-                            <li class="dropdown-item">                             @MyUsers.GetNameandEmail(User.FindFirst(ClaimTypes.NameIdentifier)?.Value).name </li>
+                            <li class="ms-3">                             @MyUsers.GetNameandEmail(User.FindFirst(ClaimTypes.NameIdentifier)?.Value).name </li>
                             <li><hr class="dropdown-divider"></li>
 
                             <li class="dropdown-item">
                                 <a href="@Url.Action("Index","User")">
-                                    <i class="fa fa-user"></i> View Profile
+                                    <i class="fa fa-user me-2"></i> View Profile
                                 </a>
                             </li>
                             <li class="dropdown-item">
                                 <a asp-area="Identity" asp-page="/Account/Manage/Index">
-                                    <i class="fa fa-cog"></i> Settings
+                                    <i class="fa fa-cog me-2"></i> Settings
                                 </a>
                             </li>
                             <li class="dropdown-item">
                                 <a href="@Url.Action("Index","Request")">
-                                    <i class="fa fa-list"></i> Your Requests
+                                    <i class="fa fa-list me-2"></i> Your Requests
                                 </a>
                             </li>
                             <li class="dropdown-item">
                                 <a href="@Url.Action("SubmitRequest","Request")">
-                                    <i class="fa fa-plus"></i> Request For Blood
+                                    <i class="fa fa-plus me-2"></i> Request For Blood
                                 </a>
                             </li>
                             <li><hr class="dropdown-divider"></li>
                             <li class="dropdown-item">
-                                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post" onclick="return confirm('Are you sure to Log Out?')">
                                     <button type="submit" class=" btn btn-dark text-white p-2" style="background-color:var(--clr-red);">Click here to Logout</button>
                                 </form>
                             </li>

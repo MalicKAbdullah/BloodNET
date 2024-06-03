@@ -42,7 +42,7 @@
                     <img src="/img/svg/not-found.svg" alt="Heart Icon" style="width: 150px; height: 150px; margin-bottom: 10px;" />
                     <h3>Stay Tuned for Blood Requests</h3>
                     <h6>Your donation can save lives. Check back soon for opportunities to help.</h6>
-                    <a href="@Url.Action("SubmitRequest","Request")" style="text-decoration: none; color: var(--clr-red); font-size:16px;">Submit a Request</a>
+                    <a href="@Url.Action("SubmitRequest","Request")" style="text-decoration: none;font-size:16px;" class="link-clr">Submit a Request</a>
                 </div>
             </div>
         }
@@ -70,7 +70,7 @@
                         <td>@bloodRequests.DTime</td>
 
                         <td>
-                                                        <form method="post" action="/Donation/Add">
+                                <form method="post" action="/Donation/Add" onclick="return confirm('Confirmation \n\nYour contact number will be shared with the recipient so he/she can contact you.\n\nAre you sure you want to accept?')">
                                                            <span class="d-none">
                                 <input name="reqId" value="@bloodRequests.Id"/>
                                     </span>

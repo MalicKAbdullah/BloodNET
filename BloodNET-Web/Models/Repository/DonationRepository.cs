@@ -5,7 +5,7 @@ namespace BloodNET_Web.Models.Repository
 {
     public class DonationRepository
     {
-        public readonly string connectionString = "Server=(localdb)\\mssqllocaldb;Database=BloodNET;Trusted_Connection=True;MultipleActiveResultSets=true";
+        public const string connectionString = "Server=(localdb)\\mssqllocaldb;Database=BloodNET;Trusted_Connection=True;MultipleActiveResultSets=true";
         public DonationRepository() { }
 
         public List<(string,DateTime)> GetDonors(int reqId)
@@ -48,7 +48,66 @@ namespace BloodNET_Web.Models.Repository
             return DonationList;
         }
 
+        public static bool getDonorStatus(string donorId)
+        {
+            bool status = false;
 
+            string selectQuery = "SELECT * FROM Donation where donorid = @donorId";
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            {
+                List<Donation> donations = sqlConnection.Query<Donation>(selectQuery, new { donorId }).ToList();
+
+                foreach (var donation in donations)
+                {
+                    int check = donation.Status;
+
+                    if (check == 0)
+                        status = false;
+                    else
+                    {
+                        status = true;
+                        break;
+                    }
+                }
+            }
+
+            return status;
+        }
+
+        public void UpdateStatus(int donationId,int status)
+        {
+
+            var query = $"update BloodRequests set status={status}  where Id = {donationId} ";
+            using (var connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                var comm = new SqlCommand(query, connection);
+
+                comm.ExecuteNonQuery();
+            }
+        }
+
+        public int getDonationId(string donorId,int reqId)
+        {
+            int id = 0;
+            string selectQuery = $"SELECT * FROM Donation where donorid = {donorId} and RequestId = {reqId}";
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            {
+                SqlCommand sqlCommand = new SqlCommand(selectQuery, sqlConnection);
+
+                sqlCommand.ExecuteReader();
+
+                List<Donation> donations = new List<Donation>();
+
+                foreach (var donation in donations)
+                {
+                    id = donation.Id;
+                    break;
+                }
+            }
+
+            return id;
+        }
 
     }
 }

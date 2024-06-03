@@ -11,7 +11,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h2>Your Requests</h2>
+                <h2 class="mt-4">Your Requests</h2>
                 <hr>
             </div>
 
@@ -23,7 +23,7 @@
                         <img src="/img/svg/not-found.svg" alt="Ineligible Icon" style="width: 200px; height: 200px;" />
                         <h3>You have no blood requests yet.</h3>
                  
-                            <a href="@Url.Action("SubmitRequest","Request")" style="color: var(--clr-red); text-decoration: none; font-size:16px">Submit a new request</a>
+                            <a href="@Url.Action("SubmitRequest","Request")" style="text-decoration: none; font-size:16px" class="link-clr">Submit a new request</a>
 
                     </div>
                 </div>
@@ -82,10 +82,10 @@
                                         <div class="col-12 col-md-2 ps-md-4 d-flex d-none d-md-block">
 
                                  
-                                            <form method="post" action="/Request/Delete">
+                                            <form method="post" action="/Request/CloseRequest">
                                              
                                                     <input name="reqId" class="d-none" value="@request.Id" />
-                                                <input type="submit" class="btn btn-design-fill" value="Delete" />
+                                                <input type="submit" class="btn btn-design-fill" value="Delete" onclick="return confirm('Are you sure to delete your blood request?')" />
                                             </form>
                                          
                                         </div>
@@ -122,7 +122,7 @@
                                         <img src="/img/svg/uneligible.svg" alt="Ineligible Icon" class="img-fluid" style="width: 100px; height: 100px; margin-bottom: 20px;" />
                                         <h3>No Respondands Yet!</h3>
 
-                                        <p> <a href="@Url.Action("SubmitRequest","Request")" style="text-decoration: none; color:var(--clr-red); font-size:16px;">Submit a new Blood Request</a> </p>
+                                        <p> <a href="@Url.Action("SubmitRequest","Request")" style="text-decoration: none;font-size:16px;" class="link-clr">Submit a new Blood Request</a> </p>
                                     </div>
                                 }
                                 else
@@ -156,19 +156,29 @@
                                         </div>
 
                                         <div class="col d-flex gap-4 align-items-center">
-                                                <img id="previewImage" src="@(donors.ImgUrl)" alt="Alternate Text" width="30px" height="30px" class="rounded-circle shadow-4" />
+                                                <img id="previewImage" src="@(donors.ImgUrl)" alt="Alternate Text" width="30" height="30" class="rounded-circle shadow-4" style="object-fit:cover" />
                                             <p>@donors.Name</p>
                                         </div>
                                         <div class="col">
-                                            <p>@donors.PhoneNumber</p>
+                                                        <span>
+                                                            <p>@donors.PhoneNumber <a class="ms-lg-2" href="tel:@donors.PhoneNumber"> <i class="fa fa-phone" style="color:var(--clr-red);font-size:25px;"></i></a></p>
+                                                            
+                                                        </span>
                                         </div>
                                         <div class="col d-flex justify-content-between" style="flex-wrap:wrap;">
                                                 @if (dateTimeIdx >= 0 && dateTimeIdx < Model.DateTimes.Count)
                                                 {
                                                     <p>@Model.DateTimes[dateTimeIdx]</p>
                                                 }
-
-                                                <button class="btn btn-outline-danger">Accept</button>
+@* 
+                                                        <form method="post" action="/User/CloseRequest">
+                                                            <span class="d-none">
+                                                                <input name="reqId" value="@request.Id" />
+                                                                <input name="donorId" value="@donors.DonorId" />
+                                                            </span>
+                                                            <button type="submit" class="btn btn-design-outline">Accept</button>
+                                                        </form> *@
+                                               
                                         
                                         </div>
                                     </div>
@@ -189,6 +199,3 @@
     </div>
     }
 </section>
-
-
-

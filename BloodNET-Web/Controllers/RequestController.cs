@@ -102,6 +102,16 @@ namespace BloodNET_Web.Controllers
         //    return RedirectToAction("index", "Home");
         //}
 
+        [HttpPost]
+
+        public IActionResult CloseRequest(int reqId)
+        {
+            BloodRequestsRepository bloodRequestsRepository = new BloodRequestsRepository();
+            bloodRequestsRepository.UpdateStatus(reqId, "False");
+
+            return RedirectToAction("Index","Request");
+        }
+
 
     }
 }
