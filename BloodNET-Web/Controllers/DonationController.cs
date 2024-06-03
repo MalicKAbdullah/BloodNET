@@ -3,6 +3,7 @@ using BloodNET_Web.Models.Interfaces;
 using BloodNET_Web.Models.Repository;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using System.Security.Claims;
@@ -71,6 +72,15 @@ namespace BloodNET_Web.Controllers
             DonationRepository.Add(donation);
 
             return RedirectToAction("Index","Home");
+        }
+
+        [HttpPost]
+        [Authorize(Policy = "AdminPolicy")]
+        public IActionResult delete(int Id)
+        {
+            IRepository<Donation> repository = new GenericRepository<Donation>(connectionString);
+            repository.Delete(Id);
+            return RedirectToAction("Donations", "Admin");
         }
     }
 }

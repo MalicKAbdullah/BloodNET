@@ -74,12 +74,12 @@ namespace BloodNET_Web.Controllers
         }
 
         [HttpPost]
-
+        [Authorize(Policy ="AdminPolicy")]
         public IActionResult delete(int reqId)
         {
             IRepository<BloodRequests> repository = new GenericRepository<BloodRequests>(connectionString);
             repository.Delete(reqId);
-            return RedirectToAction("Index", "Request");
+            return RedirectToAction("Requests", "Admin");
         }
 
 

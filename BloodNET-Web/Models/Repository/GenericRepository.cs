@@ -1,4 +1,6 @@
 ﻿using BloodNET_Web.Models.Interfaces;
+using Dapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Data.SqlClient;
 
 namespace BloodNET_Web.Models.Repository
@@ -88,6 +90,21 @@ namespace BloodNET_Web.Models.Repository
                 var t = Activator.CreateInstance<TEntity>();
                 Map(reader, t);
                 return t;
+            }
+
+        }
+
+        [Authorize(Policy ="adminPolicy")]
+        public List<TEntity> GetAll()
+        {
+            var tablename = typeof(TEntity).Name;
+
+            var query = $"select * from {tablename} ";
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                return connection.Query<TEntity>(query).ToList();
             }
 
         }

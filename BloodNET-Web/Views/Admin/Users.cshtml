@@ -1,0 +1,62 @@
+﻿@model List<MyUsers>
+
+<section class="realtime-requests">
+    <div class="content">
+        <h2>All Users</h2>
+        <hr>
+       
+        @if (Model.Count == 0)
+        {
+            <div style="display: flex; justify-content: center; align-items: center; height: 51vh;">
+                <div style="border: 1px solid #ccc; border-radius: 10px; padding: 20px; text-align: center;">
+                    <img src="/img/svg/not-found.svg" alt="Heart Icon" style="width: 150px; height: 150px; margin-bottom: 10px;" />
+                    <h3>Users Not Found</h3>
+                </div>
+            </div>
+        }
+
+        else
+        {
+
+            <div class="table-responsive-lg">
+                <table class="table table-striped table-bordered mt-3">
+                    <thead>
+                        <tr>
+                            <th scope="col">UserName/Email</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Access Failed Count</th>
+                            <th scope="col">Email Confirmed</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (MyUsers user in Model)
+                        {
+                            <tr>
+                                <td>@user.Email</td>
+                                <td>@user.FirstName</td>
+                                <td>@user.LastName</td>
+                                <td>@user.AccessFailedCount</td>
+                                <td>@user.EmailConfirmed</td>
+                                <td>
+
+                                    <form method="post" action="/User/Delete" onclick="return confirm('Are you sure?')">
+                                        <span class="d-none">
+                                            <input name="id" value="@user.Id" />
+                                        </span>
+                                        <button class="btn btn-danger">Delete</button>
+                                    </form>
+
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+    </div>
+
+</section>

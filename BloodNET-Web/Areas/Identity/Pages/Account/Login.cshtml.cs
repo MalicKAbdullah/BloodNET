@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using BloodNET_Web.Models;
+using Microsoft.AspNet.Identity;
 
 namespace BloodNET_Web.Areas.Identity.Pages.Account
 {
@@ -22,6 +23,8 @@ namespace BloodNET_Web.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<MyUsers> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+
+
 
         public LoginModel(SignInManager<MyUsers> signInManager, ILogger<LoginModel> logger)
         {
@@ -116,7 +119,16 @@ namespace BloodNET_Web.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+
+                    // Check if the logged-in user is an admin
+                    if (Input.Email == "admin@bloodnet.com")
+                    {
+                        HttpContext.Session.SetString("IsAdmin", "true");
+                        return LocalRedirect(Url.Content("~/Admin/Index"));
+                    }
+
                     return LocalRedirect(returnUrl);
+
                 }
                 if (result.RequiresTwoFactor)
                 {

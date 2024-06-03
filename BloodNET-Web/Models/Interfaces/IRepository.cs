@@ -6,5 +6,6 @@
         public void Add(TEntity entity);
         public void Delete(int id);
         public TEntity Get(int id);
+        public List<TEntity> GetAll();
     }
 }

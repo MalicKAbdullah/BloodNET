@@ -1,10 +1,20 @@
 ﻿@{
-    if (User.Identity.IsAuthenticated)
+    var isAdmin = Context.Session.GetString("IsAdmin");
+    if (!string.IsNullOrEmpty(isAdmin) && isAdmin == "true")
     {
-        Layout = "_LayoutUser";
+        Layout = "_LayoutAdmin";
     }
     else
     {
-        Layout = "_Layout";
+        if (User.Identity.IsAuthenticated)
+        {
+            Layout = "_LayoutUser";
+        }
+        else
+        {
+            Layout = "_Layout";
+        }
     }
+
+    
 }

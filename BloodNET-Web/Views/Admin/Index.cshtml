@@ -1,4 +1,56 @@
-﻿<h1>This is the Admin Panel</h1>
-<div class="container">
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
 
+<div class="content d-flex align-items-center" style="height:100vh" >
+    <div class="row justify-content-center">
+        
+        <div class="col-md-6 col-12">
+            <div class="card text-center shadow-lg mb-4" style="height: 40vh;">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fa fa-users fa-2x mb-3"></i><br>Users</h5>
+                    <p class="card-text">View information about all users of your website.</p>
+                    <a asp-action="Users" asp-controller="Admin" class="btn btn-design-fill">View Users</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-12">
+            <div class="card text-center shadow-lg mb-4" style="height: 40vh;">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fa fa-drupal fa-2x mb-3"></i><br>Blood Requests</h5>
+                    <p class="card-text">View all blood requests made on your website.</p>
+                    <a asp-action="Requests" asp-controller="Admin" class="btn btn-design-fill">View Blood Requests</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-12">
+            <div class="card text-center shadow-lg mb-4" style="height: 40vh;">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fa fa-heart fa-2x mb-3"></i><br>Donations</h5>
+                    <p class="card-text">View donations made on your website.</p>
+                    <a asp-action="Donations" asp-controller="Admin" class="btn btn-design-fill">View Donations</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-12">
+            <div class="card text-center shadow-lg mb-4" style="height: 40vh;">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fa fa-envelope fa-2x mb-3"></i><br>Contact</h5>
+                    <p class="card-text">View queries placed on your website.</p>
+                    <a asp-action="Contact" asp-controller="Admin" class="btn btn-design-fill">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+</section>
+
+<style>
+    .card-title {
+        font-weight: bold;
+
+    }
+
+
+
+</style>

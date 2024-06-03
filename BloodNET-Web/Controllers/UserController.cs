@@ -39,6 +39,13 @@ namespace BloodNET_Web.Controllers
         //    donationRepository.UpdateStatus(donationId, 1);
         //}
 
+        public IActionResult delete(string id)
+        {
+            AdminRepository adminRepository = new AdminRepository();
+            adminRepository.DeleteUser(id);
+            return RedirectToAction("Users", "Admin");
+        }
+
         public IActionResult Login()
         {
             return View();
