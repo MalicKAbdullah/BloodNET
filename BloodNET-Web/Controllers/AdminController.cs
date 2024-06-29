@@ -63,6 +63,12 @@ namespace BloodNET_Web.Controllers
             return View(adminRepository.GetDonations());
         }
 
+        public IActionResult Contact()
+        {
+            IRepository<Contacts> repository = new GenericRepository<Contacts>(connectionString);
+            return View(repository.GetAll());
+        }
+
 
     }
 }

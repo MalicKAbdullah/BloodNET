@@ -1,0 +1,40 @@
+﻿@model List<Contacts>
+
+<section class="realtime-requests">
+    <div class="content">
+        <h2>Contacts</h2>
+        <hr>
+
+        @if (Model.Count == 0)
+        {
+            <div style="display: flex; justify-content: center; align-items: center; height: 51vh;">
+                <div style="border: 1px solid #ccc; border-radius: 10px; padding: 20px; text-align: center;">
+                    <img src="/img/svg/not-found.svg" alt="Heart Icon" style="width: 150px; height: 150px; margin-bottom: 10px;" />
+                    <h3>No Contacts</h3>
+                </div>
+            </div>
+        }
+
+        else
+        {
+            @foreach (Contacts contact in Model)
+            {
+                <div class="col-md-6 col-12">
+                    <div class="card text-center shadow-lg mb-4" style="height: 40vh;">
+                        <div class="card-body">
+                            <h5 class="card-title">Name: @contact.Name</h5>
+                            <h5 class="card-title">Phone Number: @contact.PhoneNumber</h5>
+                            <h5 class="card-title">Email: @contact.Email</h5>
+                            <h5 class="card-title">Subject: @contact.Subject</h5>
+                            <p class="card-text">Message: @contact.Body</p>
+
+                        </div>
+                    </div>
+                </div>
+
+            }
+        }
+    </div>
+    </div>
+
+</section>

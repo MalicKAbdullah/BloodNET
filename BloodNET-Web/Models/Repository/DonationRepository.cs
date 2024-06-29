@@ -40,7 +40,7 @@ namespace BloodNET_Web.Models.Repository
             string selectQuery = "SELECT * FROM Donation where donorid = @donorId";
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
-                List<Donation> donations = sqlConnection.Query<Donation>(selectQuery, new { donorId }).ToList();
+                List<Donation> donations = sqlConnection.Query<Donation>(selectQuery, new { donorId}).ToList();
 
                 foreach (var donation in donations)
                 {
