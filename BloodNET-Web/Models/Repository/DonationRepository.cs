@@ -6,7 +6,7 @@ using Microsoft.Data.SqlClient;
 
 namespace BloodNET_Web.Models.Repository
 {
-    public class DonationRepository
+    public class DonationRepository:IDonation
     {
         public const string connectionString = "Server=(localdb)\\mssqllocaldb;Database=BloodNET;Trusted_Connection=True;MultipleActiveResultSets=true";
         public DonationRepository() { }
@@ -51,7 +51,7 @@ namespace BloodNET_Web.Models.Repository
             return DonationList;
         }
 
-        public static bool getDonorStatus(string donorId)
+        public  bool getDonorStatus(string donorId)
         {
             bool status = false;
 

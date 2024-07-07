@@ -12,7 +12,16 @@ namespace BloodNET_Web.Controllers
     public class AdminController : Controller
     {
         public readonly string connectionString = "Server=(localdb)\\mssqllocaldb;Database=BloodNET;Trusted_Connection=True;MultipleActiveResultSets=true";
+        private readonly IAdmin _admin;
+        private readonly IBloodRequests _bloodRequests;
+        private readonly IDonation _donation;
 
+        public AdminController(IAdmin admin, IBloodRequests bloodRequests, IDonation donation)
+        {
+            _admin = admin;
+            _bloodRequests = bloodRequests;
+            _donation = donation;
+        }
         public IActionResult Index()
         {
             return View();
@@ -20,13 +29,12 @@ namespace BloodNET_Web.Controllers
 
         public IActionResult Requests()
         {
-            BloodRequestsRepository bloodRequestsRepository = new BloodRequestsRepository();
-            List<BloodRequests> bloodRequests = bloodRequestsRepository.GetAll();
+            List<BloodRequests> bloodRequests = _bloodRequests.GetAll();
 
-            DonationRepository donationRepository = new DonationRepository();
-            List<(string, int)> obj = donationRepository.GetDonations(User.Identity.GetUserId());
+    
+            List<(string, int)> obj = _donation.GetDonations(User.Identity.GetUserId());
 
-            bloodRequestsRepository.availibleRequests(bloodRequests, obj);
+            _bloodRequests.availibleRequests(bloodRequests, obj);
             return View(bloodRequests);
         }
 
@@ -34,18 +42,18 @@ namespace BloodNET_Web.Controllers
         [HttpPost]
         public IActionResult Requests(string type)
         {
-            BloodRequestsRepository bloodRequestsRepository = new BloodRequestsRepository();
+
             List<BloodRequests> bloodRequests = new List<BloodRequests>();
 
             ViewBag.SelectedBloodType = type;
 
             if (type == "All")
             {
-                bloodRequests = bloodRequestsRepository.GetAll();
+                bloodRequests = _bloodRequests.GetAll();
             }
             else
             {
-                bloodRequests = bloodRequestsRepository.SearchByType(type, " ");
+                bloodRequests = _bloodRequests.SearchByType(type, " ");
             }
             return View(bloodRequests);
 
@@ -53,14 +61,14 @@ namespace BloodNET_Web.Controllers
 
         public IActionResult Users()
         {
-            AdminRepository adminRepository = new AdminRepository();
-            return View(adminRepository.GetUsers());
+
+            return View(_admin.GetUsers());
         }
 
         public IActionResult Donations()
         {
-            AdminRepository adminRepository = new AdminRepository();
-            return View(adminRepository.GetDonations());
+
+            return View(_admin.GetDonations());
         }
 
         public IActionResult Contact()

@@ -15,6 +15,13 @@ namespace BloodNET_Web.Controllers
 
         public readonly string connectionString = "Server=(localdb)\\mssqllocaldb;Database=BloodNET;Trusted_Connection=True;MultipleActiveResultSets=true";
 
+        private readonly IBloodDonors _bloodDonors;
+
+        public RequestController(IBloodDonors bloodDonors)
+        {
+            _bloodDonors = bloodDonors;
+        }
+
         public IActionResult Index()
         {
             BloodRequestsRepository bloodRequestsRepository = new BloodRequestsRepository();
@@ -39,7 +46,7 @@ namespace BloodNET_Web.Controllers
             List<List<BloodDonors>> bloodDonors = new List<List<BloodDonors>>();
             foreach(var ids in donorIds)
             {
-                List<BloodDonors> donors = BloodDonorsRepository.GetDonorsById(ids);
+                List<BloodDonors> donors = _bloodDonors.GetDonorsById(ids);
                 bloodDonors.Add(donors);
             }
 

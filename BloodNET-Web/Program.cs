@@ -1,6 +1,8 @@
 using BloodNET_Web.Controllers;
 using BloodNET_Web.Data;
 using BloodNET_Web.Models;
+using BloodNET_Web.Models.Interfaces;
+using BloodNET_Web.Models.Repository;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +25,14 @@ builder.Services.AddAuthorization(options => {
 });
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IBloodDonors, BloodDonorsRepository>();
+builder.Services.AddScoped<IAdmin, AdminRepository>();
+builder.Services.AddScoped<IBloodRequests, BloodRequestsRepository>();
+builder.Services.AddScoped<IContacts, ContactsRepository>();
+builder.Services.AddScoped<IDonation, DonationRepository>();
+
+
 
 // Register DonorController for dependency injection
 builder.Services.AddTransient<DonorController>();

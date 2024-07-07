@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using BloodNET_Web.Models.Interfaces;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.IdentityModel.Tokens;
@@ -6,7 +7,7 @@ using System.Security.Claims;
 
 namespace BloodNET_Web.Models.Repository
 {
-    public class BloodDonorsRepository
+    public class BloodDonorsRepository:IBloodDonors
     {
         public const string connectionstring = "Server=(localdb)\\mssqllocaldb;Database=BloodNET;Trusted_Connection=True;MultipleActiveResultSets=true";
         public BloodDonorsRepository() { }
@@ -39,7 +40,7 @@ namespace BloodNET_Web.Models.Repository
             sqlConnection.Close();
         }
 
-        public static BloodDonors GetDonorById(string id)
+        public BloodDonors GetDonorById(string id)
         {
             SqlConnection sqlConnection = new SqlConnection(connectionstring);
             string selectQuery = "SELECT * FROM BloodDonors where Donorid = @uid";
@@ -92,7 +93,7 @@ namespace BloodNET_Web.Models.Repository
             }
         }
 
-        public static List<BloodDonors> GetDonorsById(List<string>ls)
+        public  List<BloodDonors> GetDonorsById(List<string>ls)
         {
             SqlConnection sqlConnection = new SqlConnection(connectionstring);
 

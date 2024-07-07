@@ -1,4 +1,5 @@
 ﻿using BloodNET_Web.Models;
+using BloodNET_Web.Models.Interfaces;
 using BloodNET_Web.Models.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,18 +10,26 @@ namespace BloodNET_Web.Controllers
     [Authorize]
     public class UserController : Controller
     {
+
+        private readonly IBloodDonors _bloodDonors;
+        private readonly IDonation _donation;
+
+        public UserController(IBloodDonors bloodDonors, IDonation donation)
+        {
+            _bloodDonors = bloodDonors;
+            _donation = donation;
+        }
+
         public IActionResult Index()
         {
             string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            
-          
-            BloodDonors bloodDonor = BloodDonorsRepository.GetDonorById(userId);
+   
 
-            ViewBag.CompleteProfile = bloodDonor != null;
+            ViewBag.CompleteProfile = _bloodDonors.GetDonorById(userId) != null;
 
-            ViewBag.donorStatus = DonationRepository.getDonorStatus(userId);
+            ViewBag.donorStatus = _donation.getDonorStatus(userId);
 
-            return View(bloodDonor);
+            return View(_bloodDonors.GetDonorById(userId));
         }
 
         //[HttpPost]

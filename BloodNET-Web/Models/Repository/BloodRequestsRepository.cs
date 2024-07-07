@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿using BloodNET_Web.Models.Interfaces;
+using Dapper;
 using Microsoft.AspNet.Identity;
 using Microsoft.CodeAnalysis.Elfie.Serialization;
 using Microsoft.Data.SqlClient;
@@ -7,7 +8,7 @@ using static Dapper.SqlMapper;
 
 namespace BloodNET_Web.Models.Repository
 {
-    public class BloodRequestsRepository
+    public class BloodRequestsRepository : IBloodRequests
     {
         public const string connectionstring = "Server=(localdb)\\mssqllocaldb;Database=BloodNET;Trusted_Connection=True;MultipleActiveResultSets=true";
         public BloodRequestsRepository() { }
@@ -55,16 +56,6 @@ namespace BloodNET_Web.Models.Repository
                 sqlConnection.Close();
                 return bloodRequests;
             }
-        }
-
-        public void Update(BloodRequests bloodRequests)
-        {
-
-        }
-
-        public void Delete(BloodRequests bloodRequests)
-        {
-
         }
 
         public BloodRequests GetbyId(int rid)

@@ -1,8 +1,9 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using BloodNET_Web.Models.Interfaces;
+using Microsoft.Data.SqlClient;
 
 namespace BloodNET_Web.Models.Repository
 {
-    public class ContactsRepository
+    public class ContactsRepository:IContacts
     {
         public const string connectionstring = "Server=(localdb)\\mssqllocaldb;Database=BloodNET;Trusted_Connection=True;MultipleActiveResultSets=true";
         public ContactsRepository() { }

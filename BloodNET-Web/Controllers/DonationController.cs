@@ -14,9 +14,11 @@ namespace BloodNET_Web.Controllers
     {
         public readonly string connectionString = "Server=(localdb)\\mssqllocaldb;Database=BloodNET;Trusted_Connection=True;MultipleActiveResultSets=true";
         private readonly DonorController _donorController;
-        public DonationController(IServiceProvider serviceProvider)
+        private readonly IBloodDonors _bloodDonors;
+        public DonationController(IServiceProvider serviceProvider, IBloodDonors bloodDonors)
         {
             _donorController = serviceProvider.GetRequiredService<DonorController>();
+            _bloodDonors = bloodDonors;
         }
 
         public IActionResult Index()
@@ -30,7 +32,7 @@ namespace BloodNET_Web.Controllers
         {
             
 
-            BloodDonors donor = BloodDonorsRepository.GetDonorById(User.Identity.GetUserId()); // Implement this method to check profile completion
+            BloodDonors donor = _bloodDonors.GetDonorById(User.Identity.GetUserId()); // Implement this method to check profile completion
             bool ProfileComplete = donor != null;
 
             if (!ProfileComplete)
