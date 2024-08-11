@@ -1,4 +1,6 @@
-﻿namespace BloodNET_Web.Models
+﻿using BloodNET_Web.Models.CustomAttributes;
+
+namespace BloodNET_Web.Models
 {
     public class BloodDonors
     {
@@ -12,8 +14,6 @@
         public string WeightUnit { get; set; }
 
         public string BloodGroup { get; set; }
-
-        public string PhoneNumber { get; set; }
 
         public string Email {  get; set; }
 
@@ -30,6 +30,9 @@
         public IFormFile Image { get; set; }
 
         public string ImgUrl { get; set; }
+
+        [PhoneFormat(ErrorMessage = "Please enter a valid phone number.")]
+        public string PhoneNumber { get; set; }
 
         public BloodDonors()
         {

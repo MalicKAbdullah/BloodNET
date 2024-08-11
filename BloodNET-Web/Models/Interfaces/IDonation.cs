@@ -2,6 +2,7 @@
 {
     public interface IDonation
     {
+
         public List<(string, DateTime)> GetDonors(int reqId);
         public List<(string donorId, int reqId)> GetDonations(string donorId);
         public  bool getDonorStatus(string donorId);

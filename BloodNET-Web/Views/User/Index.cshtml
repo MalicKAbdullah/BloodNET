@@ -1,4 +1,5 @@
 ﻿@using System.Security.Claims
+@using BloodNET_Web.Models.Repository
 @model BloodDonors
 
 <section class="submitted-information mt-4">
@@ -27,7 +28,7 @@
                 <div class="col-sm-6 col-4 d-flex flex-column align-items-center">
                     <form method="post" enctype="multipart/form-data">
                         <div style="position: relative; display: inline-block;">
-                            <img id="previewImage" src="@(Model.ImgUrl ?? "img/avatar.jpg")" alt="Alternate Text" width="200" height="200" class="rounded-circle shadow-4 mt-3 mb-3" style="object-fit:cover;" />
+                            <img id="previewImage" src="/@(Model.ImgUrl ?? "img/avatar.jpg")" alt="Alternate Text" width="200" height="200" class="rounded-circle shadow-4 mt-3 mb-3" style="object-fit:cover;" />
                             <input type="file" name="imageFile" id="imageFile" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer;" onchange="previewFile()">
                         </div>
                     </form>
@@ -38,7 +39,7 @@
                     <div class="col-sm-4 ">
                         <h4>Name:</h4>
                         <p id="submitted-name">
-                        @MyUsers.GetNameandEmail(User.FindFirst(ClaimTypes.NameIdentifier)?.Value).name
+                            @UsersRepository.GetNameandEmail(User.FindFirst(ClaimTypes.NameIdentifier)?.Value).name
                         </p>
                     </div>
                 <div class="col-sm-4 col-12">
@@ -49,11 +50,11 @@
             <div class="row ">
                 <div class="col">
                     <h4>Phone:</h4>
-                    <p id="submitted-phone">@Model.PhoneNumber</p>
+                    <p id="submitted-phone">@Html.Raw(@Model.PhoneNumber)</p>
                 </div>
                 <div class="col">
                     <h4>Email:</h4>
-                    <p id="submitted-email"> @MyUsers.GetNameandEmail(User.FindFirst(ClaimTypes.NameIdentifier)?.Value).email</p>
+                        <p id="submitted-email"> @UsersRepository.GetNameandEmail(User.FindFirst(ClaimTypes.NameIdentifier)?.Value).email</p>
                 </div>
             </div>
 
@@ -78,15 +79,15 @@
             <div class="row  justify-content-around">
                     <div class="col">
                         <h4>Country:</h4>
-                        <p id="submitted-country">@Model.Country</p>
+                        <p id="submitted-country">@Html.Raw(@Model.Country)</p>
                     </div>
                     <div class="col">
                         <h4>City:</h4>
-                        <p id="submitted-city">@Model.City</p>
+                        <p id="submitted-city">@Html.Raw(@Model.City)</p>
                     </div>
                     <div class="col-12 col-md-4">
                         <h4>Address:</h4>
-                        <p id="submitted-address">@Model.Address</p>
+                        <p id="submitted-address">@Html.Raw(@Model.Address)</p>
                     </div>
 
                 </div>
@@ -94,7 +95,7 @@
                     <div class="col-md-12">
                         <h4>Medical History:</h4>
                         <p id="submitted-medical-history" style="text-align:justify;">
-                           @Model.MedicalHistory
+                          @Html.Raw( @Model.MedicalHistory)
                         </p>
                     </div>
                 </div>

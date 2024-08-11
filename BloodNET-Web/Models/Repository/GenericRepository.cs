@@ -1,17 +1,20 @@
-﻿using BloodNET_Web.Models.Interfaces;
+﻿using BloodNET_Web.Data;
+using BloodNET_Web.Models.Interfaces;
 using Dapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 
 namespace BloodNET_Web.Models.Repository
 {
     public class GenericRepository<TEntity> : IRepository<TEntity>
     {
-        private readonly string connectionString;
-        public GenericRepository(string c)
+        private readonly ApplicationDbContext _context;
+        public GenericRepository(ApplicationDbContext context)
         {
-            connectionString = c;
+            _context = context;
         }
+ 
 
         public void Add(TEntity entity)
         {
@@ -26,7 +29,7 @@ namespace BloodNET_Web.Models.Repository
 
             var query = $"insert into {tablename} ({columnNames}) values({parameterName}) ";
 
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(_context.Database.GetConnectionString()))
             {
                 connection.Open();
                 var comm = new SqlCommand(query, connection);
@@ -47,7 +50,7 @@ namespace BloodNET_Web.Models.Repository
             var setClause = string.Join(",", properties.Select(a => $"{a.Name}=@{a.Name}"));
 
             var query = $"update {tableName} set {setClause} where {primaryKey}=@{primaryKey} ";
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(_context.Database.GetConnectionString()))
             {
                 connection.Open();
                 var comm = new SqlCommand(query, connection);
@@ -66,7 +69,7 @@ namespace BloodNET_Web.Models.Repository
 
             var query = $"delete from {tablename} where id = @id";
 
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(_context.Database.GetConnectionString()))
             {
                 connection.Open();
                 SqlCommand cmd = new SqlCommand(query, connection);
@@ -81,7 +84,7 @@ namespace BloodNET_Web.Models.Repository
 
             var query = $"select * from {tablename} where id = @id";
 
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(_context.Database.GetConnectionString()))
             {
                 connection.Open();
                 SqlCommand cmd = new SqlCommand(query, connection);
@@ -101,7 +104,7 @@ namespace BloodNET_Web.Models.Repository
 
             var query = $"select * from {tablename} ";
 
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(_context.Database.GetConnectionString()))
             {
                 connection.Open();
                 return connection.Query<TEntity>(query).ToList();

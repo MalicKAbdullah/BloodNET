@@ -1,8 +1,10 @@
-﻿using BloodNET_Web.Models.Interfaces;
+﻿using BloodNET_Web.Data;
+using BloodNET_Web.Models.Interfaces;
 using Dapper;
 using Microsoft.AspNet.Identity;
 using Microsoft.CodeAnalysis.Elfie.Serialization;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using static Dapper.SqlMapper;
 
@@ -10,12 +12,19 @@ namespace BloodNET_Web.Models.Repository
 {
     public class BloodRequestsRepository : IBloodRequests
     {
-        public const string connectionstring = "Server=(localdb)\\mssqllocaldb;Database=BloodNET;Trusted_Connection=True;MultipleActiveResultSets=true";
-        public BloodRequestsRepository() { }
+        private readonly ApplicationDbContext _context;
+
+        private SqlConnection sqlConnection;
+
+        public BloodRequestsRepository(ApplicationDbContext context)
+        {
+            _context = context;
+            sqlConnection = new SqlConnection(_context.Database.GetConnectionString());
+
+        }
 
         public void Add(BloodRequests bloodRequests)
         {
-            SqlConnection sqlConnection = new SqlConnection(connectionstring);
             string insertQuery = "INSERT INTO BloodRequests(BloodGroup,DTime,RecipientName,RecipientPhone,Location,Description,userId) VALUES(@bgroup,@dtime,@rname,@rphone,@loc,@desc,@uId)";
             sqlConnection.Open();
             SqlCommand insertCommand = new SqlCommand(insertQuery, sqlConnection);
@@ -35,7 +44,7 @@ namespace BloodNET_Web.Models.Repository
 
         public List<BloodRequests> SearchByType(string type, string userId)
         {
-            using (SqlConnection sqlConnection = new SqlConnection(connectionstring))
+            using (SqlConnection sqlConnection = new SqlConnection(_context.Database.GetConnectionString()))
             {
                 string searchQuery = "SELECT * FROM BloodRequests WHERE BloodGroup = @type AND userId != @userId";
   
@@ -60,7 +69,6 @@ namespace BloodNET_Web.Models.Repository
 
         public BloodRequests GetbyId(int rid)
         {
-            SqlConnection sqlConnection = new SqlConnection(connectionstring);
             string selectQuery = "SELECT * FROM BloodRequests WHERE id = @uid";
 
             sqlConnection.Open();
@@ -82,7 +90,7 @@ namespace BloodNET_Web.Models.Repository
         public void UpdateStatus(int reqId, string status)
         {
             var query = "UPDATE BloodRequests SET status = @status WHERE Id = @reqId";
-            using (var connection = new SqlConnection(connectionstring))
+            using (var connection = new SqlConnection(_context.Database.GetConnectionString()))
             {
                 connection.Open();
                 var comm = new SqlCommand(query, connection);
@@ -95,7 +103,6 @@ namespace BloodNET_Web.Models.Repository
 
         public List<BloodRequests> Get(string id)
         {
-            SqlConnection sqlConnection = new SqlConnection(connectionstring);
             string selectQuery = "SELECT * FROM BloodRequests WHERE userid = @uid AND status = 'True'";
 
             sqlConnection.Open();
@@ -117,7 +124,6 @@ namespace BloodNET_Web.Models.Repository
 
         public List<BloodRequests> GetAll()
         {
-            SqlConnection sqlConnection = new SqlConnection(connectionstring);
             string selectQuery = "SELECT * FROM BloodRequests";
             sqlConnection.Open();
             SqlCommand selectCommand = new SqlCommand(selectQuery, sqlConnection);
@@ -137,7 +143,6 @@ namespace BloodNET_Web.Models.Repository
 
         public List<BloodRequests> GetAllExcept(string userId)
         {
-            SqlConnection sqlConnection = new SqlConnection(connectionstring);
             string selectQuery = "SELECT * FROM BloodRequests WHERE userId != @userId";
             sqlConnection.Open();
             SqlCommand selectCommand = new SqlCommand(selectQuery, sqlConnection);

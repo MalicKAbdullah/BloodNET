@@ -13,7 +13,7 @@ namespace BloodNET_Web.Models.Interfaces
 
         public List<BloodDonors> GetDonorsById(List<string> ls);
 
-   
+        public int Eligibility(string userId);
 
 
 

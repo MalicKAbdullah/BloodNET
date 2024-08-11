@@ -9,7 +9,6 @@
 
 
 <head>
-
 	<script src="~/lib/jquery/dist/jquery.min.js"></script>
 </head>
 (function( factory ) {

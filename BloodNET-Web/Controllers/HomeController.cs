@@ -1,4 +1,5 @@
 using BloodNET_Web.Models;
+using BloodNET_Web.Models.Interfaces;
 using BloodNET_Web.Models.Repository;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Authorization;
@@ -14,10 +15,28 @@ namespace BloodNET_Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IContacts _contactsRepository;
+        private readonly IBloodRequests _bloodRequestsRepository;
+        private readonly IDonation _donationRepository;
 
-        public HomeController(ILogger<HomeController> logger)
+        private void sanitize(Contacts contact)
+        {
+            contact.Subject = System.Web.HttpUtility.HtmlEncode(contact.Subject);
+            contact.Email = System.Web.HttpUtility.HtmlEncode(contact.Email);
+            contact.Body = System.Web.HttpUtility.HtmlEncode(contact.Body);
+            contact.PhoneNumber = System.Web.HttpUtility.HtmlEncode(contact.PhoneNumber);
+            contact.Name = System.Web.HttpUtility.HtmlEncode(contact.Name);
+        }
+
+           
+
+        public HomeController(ILogger<HomeController> logger, IContacts contactRepository, IBloodRequests bloodRequestsRepository, IDonation donationRepository)
         {
             _logger = logger;
+            _contactsRepository = contactRepository;
+            _bloodRequestsRepository = bloodRequestsRepository;
+            _donationRepository = donationRepository;
+       
         }
 
         public IActionResult Index()
@@ -26,8 +45,8 @@ namespace BloodNET_Web.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 TempData["userId"] = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-                TempData["name"] = MyUsers.GetNameandEmail(User.FindFirst(ClaimTypes.NameIdentifier)?.Value).name;
-                TempData["email"] = MyUsers.GetNameandEmail(User.FindFirst(ClaimTypes.NameIdentifier)?.Value).email;
+                TempData["name"] = UsersRepository.GetNameandEmail(User.FindFirst(ClaimTypes.NameIdentifier)?.Value).name;
+                TempData["email"] = UsersRepository.GetNameandEmail(User.FindFirst(ClaimTypes.NameIdentifier)?.Value).email;
             }
                 return View();
         }
@@ -42,11 +61,21 @@ namespace BloodNET_Web.Controllers
 			return View();
 		}
 
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public IActionResult Contact(Contacts contacts)
         {
-            ContactsRepository contactsRepository = new ContactsRepository();
-            contactsRepository.Add(contacts);
+
+            if(!ModelState.IsValid)
+            {
+                Debug.WriteLine("Model State is not valid");
+                return View();
+            }
+
+            sanitize(contacts);
+
+            
+            _contactsRepository.Add(contacts);
 
             return View();
         }
@@ -70,8 +99,7 @@ namespace BloodNET_Web.Controllers
         [Authorize]
         public IActionResult Realtime()
         {
-            BloodRequestsRepository bloodRequestsRepository = new BloodRequestsRepository();
-            List<BloodRequests> bloodRequests = bloodRequestsRepository.GetAllExcept(User.Identity.GetUserId());
+            List<BloodRequests> bloodRequests = _bloodRequestsRepository.GetAllExcept(User.Identity.GetUserId());
 
             //if (HttpContext.Session.GetInt32("ReqId").HasValue)
             //{
@@ -81,18 +109,16 @@ namespace BloodNET_Web.Controllers
             //        bloodRequests.Remove(itemToRemove);
             //}
 
-            DonationRepository donationRepository = new DonationRepository();
-            List<(string,int)> obj = donationRepository.GetDonations(User.Identity.GetUserId());
+            List<(string,int)> obj = _donationRepository.GetDonations(User.Identity.GetUserId());
 
-            bloodRequestsRepository.availibleRequests(bloodRequests, obj);
+            _bloodRequestsRepository.availibleRequests(bloodRequests, obj);
             return View(bloodRequests);
         }
 
         [Authorize]
-        [HttpPost]
-        public IActionResult Realtime(string type)
+      
+        public IActionResult RealtimeRequests(string type)
         {
-            BloodRequestsRepository bloodRequestsRepository = new BloodRequestsRepository();
             List<BloodRequests> bloodRequests = new List<BloodRequests>();
 
             //if (HttpContext.Session.GetInt32("ReqId").HasValue)
@@ -105,13 +131,15 @@ namespace BloodNET_Web.Controllers
 
             if (type == "All")
             {
-                bloodRequests = bloodRequestsRepository.GetAllExcept(User.Identity.GetUserId());
+                bloodRequests = _bloodRequestsRepository.GetAllExcept(User.Identity.GetUserId());
             }
             else
             {
-                bloodRequests = bloodRequestsRepository.SearchByType(type,User.Identity.GetUserId());
+                bloodRequests = _bloodRequestsRepository.SearchByType(type,User.Identity.GetUserId());
             }
-            return View(bloodRequests);
+
+            return PartialView("_RealtimeRequests", bloodRequests);
+            //return View(bloodRequests);
 
         }
 

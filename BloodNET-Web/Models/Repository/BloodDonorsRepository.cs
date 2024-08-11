@@ -1,7 +1,9 @@
-﻿using BloodNET_Web.Models.Interfaces;
+﻿using BloodNET_Web.Data;
+using BloodNET_Web.Models.Interfaces;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 
@@ -9,12 +11,18 @@ namespace BloodNET_Web.Models.Repository
 {
     public class BloodDonorsRepository:IBloodDonors
     {
-        public const string connectionstring = "Server=(localdb)\\mssqllocaldb;Database=BloodNET;Trusted_Connection=True;MultipleActiveResultSets=true";
-        public BloodDonorsRepository() { }
+        private readonly ApplicationDbContext _context;
+        private SqlConnection sqlConnection;
+
+        public BloodDonorsRepository(ApplicationDbContext context)
+        {
+            _context = context;
+            sqlConnection = new SqlConnection(_context.Database.GetConnectionString());
+
+        }
 
         public void Add(BloodDonors bloodDonors,(string name,string email) var)
         {
-            SqlConnection sqlConnection = new SqlConnection(connectionstring);
             string insertQuery = "INSERT INTO BloodDonors(DonorId, Name, DOB, Gender, Weight, WeightUnit, BloodGroup, PhoneNumber, Email, Address, City, Country, MedicalHistory, DonorStatus,imgUrl) VALUES(@donorId, @name, @dob, @gender, @weight, @weightUnit, @bloodGroup, @phoneNumber, @email, @address, @city, @country, @MedicalHistory, @DonorStatus,@imgurl)";
 
             sqlConnection.Open();
@@ -42,7 +50,6 @@ namespace BloodNET_Web.Models.Repository
 
         public BloodDonors GetDonorById(string id)
         {
-            SqlConnection sqlConnection = new SqlConnection(connectionstring);
             string selectQuery = "SELECT * FROM BloodDonors where Donorid = @uid";
 
             sqlConnection.Open();
@@ -84,7 +91,7 @@ namespace BloodNET_Web.Models.Repository
         {
 
             var query = $"update BloodDonors set Donorstatus={status}  where donorId = {donorId} ";
-            using (var connection = new SqlConnection(connectionstring))
+            using (var connection = new SqlConnection(_context.Database.GetConnectionString()))
             {
                 connection.Open();
                 var comm = new SqlCommand(query, connection);
@@ -95,9 +102,6 @@ namespace BloodNET_Web.Models.Repository
 
         public  List<BloodDonors> GetDonorsById(List<string>ls)
         {
-            SqlConnection sqlConnection = new SqlConnection(connectionstring);
-
-
             sqlConnection.Open();
 
             List<BloodDonors> bloodDonors = new List<BloodDonors>();
@@ -125,6 +129,26 @@ namespace BloodNET_Web.Models.Repository
 
             sqlConnection.Close();
             return bloodDonors;
+        }
+
+        public int Eligibility(string userId)
+        {
+            string selectQuery = "SELECT * FROM BloodDonors where Donorid = @uid";
+
+            sqlConnection.Open();
+            SqlCommand selectCommand = new SqlCommand(selectQuery, sqlConnection);
+            selectCommand.Parameters.AddWithValue("uid", userId);
+
+            int check = 0;
+
+            SqlDataReader sqlDataReader = selectCommand.ExecuteReader();
+            while (sqlDataReader.Read())
+            {
+                check = int.Parse(sqlDataReader["DonorStatus"].ToString());
+            }
+
+            sqlConnection.Close();
+            return check;
         }
     }
 }

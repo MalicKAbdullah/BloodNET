@@ -1,0 +1,52 @@
+﻿@model List<BloodRequests>
+
+@if (Model.Count == 0)
+{
+    <div style="display: flex; justify-content: center; align-items: center; height: 51vh;">
+        <div style="border: 1px solid #ccc; border-radius: 10px; padding: 20px; text-align: center;">
+            <img src="/img/svg/not-found.svg" alt="Heart Icon" style="width: 150px; height: 150px; margin-bottom: 10px;" />
+            <h3>Stay Tuned for Blood Requests</h3>
+            <h6>Your donation can save lives. Check back soon for opportunities to help.</h6>
+            <a href="@Url.Action("SubmitRequest","Request")" style="text-decoration: none;font-size:16px;" class="link-clr">Submit a Request</a>
+        </div>
+    </div>
+}
+
+else
+{
+
+
+<table class="table table-striped table-bordered mt-3 table-responsive-lg" id="realtime-table">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Blood Group</th>
+            <th scope="col">Location</th>
+            <th scope="col">Date & Time</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (BloodRequests bloodRequests in Model)
+        {
+            <tr>
+                <td>@Html.Raw(@bloodRequests.RecipientName)</td>
+                <td>@Html.Raw(@bloodRequests.BloodGroup)</td>
+                <td>@Html.Raw(@bloodRequests.Location)</td>
+                <td>@Html.Raw(@bloodRequests.DTime)</td>
+
+                <td>
+                    <form method="post" action="/Donation/Add" onclick="return confirm('Confirmation \n\nYour contact number will be shared with the recipient so he/she can contact you.\n\nAre you sure you want to accept?')">
+                        <span class="d-none">
+                            <input name="reqId" value="@bloodRequests.Id" />
+                        </span>
+                        <button id="acceptButton" onclick="checkProfileCompletion()" type="submit" class="btn btn-success">Accept</button>
+                    </form>
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+</table>
+}

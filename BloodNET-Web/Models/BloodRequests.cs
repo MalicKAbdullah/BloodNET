@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using BloodNET_Web.Models.CustomAttributes;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using NuGet.Protocol.Core.Types;
@@ -13,6 +14,7 @@ namespace BloodNET_Web.Models
 
         public string RecipientName {  get; set; }
 
+        [PhoneFormat()]
         public string RecipientPhone { get; set; }
 
         public string Location { get; set; }

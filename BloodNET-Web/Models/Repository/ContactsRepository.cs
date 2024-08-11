@@ -1,16 +1,24 @@
-﻿using BloodNET_Web.Models.Interfaces;
+﻿using BloodNET_Web.Data;
+using BloodNET_Web.Models.Interfaces;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 
 namespace BloodNET_Web.Models.Repository
 {
     public class ContactsRepository:IContacts
     {
-        public const string connectionstring = "Server=(localdb)\\mssqllocaldb;Database=BloodNET;Trusted_Connection=True;MultipleActiveResultSets=true";
-        public ContactsRepository() { }
+        private readonly ApplicationDbContext _context;
+        private SqlConnection sqlConnection;
+
+        public ContactsRepository(ApplicationDbContext context)
+        {
+            _context = context;
+            sqlConnection = new SqlConnection(_context.Database.GetConnectionString());
+
+        }
 
         public void Add(Contacts contacts)
         {
-            SqlConnection sqlConnection = new SqlConnection(connectionstring);
             string insertQuery = "INSERT INTO contacts(Name, PhoneNumber, Email, Subject,Body) VALUES(@name,@phoneNumber, @email, @subject, @body)";
 
             sqlConnection.Open();

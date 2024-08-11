@@ -11,16 +11,16 @@ namespace BloodNET_Web.Controllers
     [Authorize(Policy ="AdminPolicy")]
     public class AdminController : Controller
     {
-        public readonly string connectionString = "Server=(localdb)\\mssqllocaldb;Database=BloodNET;Trusted_Connection=True;MultipleActiveResultSets=true";
         private readonly IAdmin _admin;
         private readonly IBloodRequests _bloodRequests;
         private readonly IDonation _donation;
-
-        public AdminController(IAdmin admin, IBloodRequests bloodRequests, IDonation donation)
+        private readonly IRepository<Contacts> _contactRepository;
+        public AdminController(IAdmin admin, IBloodRequests bloodRequests, IDonation donation,IRepository<Contacts> _contactRepo)
         {
             _admin = admin;
             _bloodRequests = bloodRequests;
             _donation = donation;
+            _contactRepository = _contactRepo;
         }
         public IActionResult Index()
         {
@@ -59,22 +59,22 @@ namespace BloodNET_Web.Controllers
 
         }
 
-        public IActionResult Users()
+        [HttpGet]
+        public JsonResult Users()
         {
 
-            return View(_admin.GetUsers());
+            return Json(_admin.GetUsers());
         }
 
         public IActionResult Donations()
         {
-
             return View(_admin.GetDonations());
         }
 
         public IActionResult Contact()
         {
-            IRepository<Contacts> repository = new GenericRepository<Contacts>(connectionString);
-            return View(repository.GetAll());
+
+            return View(_contactRepository.GetAll());
         }
 
 

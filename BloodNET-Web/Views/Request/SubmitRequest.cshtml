@@ -1,11 +1,14 @@
-﻿
+﻿@model BloodRequests
+
+
 <section class="donor-details">
     <div class="col-12">
         <h2 class="text-center pb-2">Submit Your Blood Request</h2>
     </div>
     <div class="container donor-container"
          style="background: url(/img/right-image.png) no-repeat center; background-size: cover; width: 100%;">
-        <form id="donor-form" method="post">
+        <form id="donor-form" asp>
+            @Html.AntiForgeryToken()
             <div class="row">
                 <div class="col-6 col-md-4 col-lg-2">
                     <label for="d-blood-group">Blood Group </label>
@@ -34,6 +37,7 @@
                     <div class="col-sm-6 col-md-4 col-lg-3">
                         <label for="d-phone">Blood Recipient Phone</label>
                         <input type="tel" id="d-phone" placeholder="Enter Phone Number" name="rphone" required>
+                  
                     </div>
 
                 </div>
@@ -53,7 +57,7 @@
 
                 <div class="row mt-3">
                     <div class="col">
-                        <button type="submit" class="btn " onclick="alert('Request submitted successfully')">Submit Request</button>
+                        <button type="submit" class="btn " onclick="submitRequest()">Submit Request</button>
                     </div>
                 </div>
 
@@ -80,7 +84,33 @@
 }
 
 @section myjs{
-    <script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#donor-form').on('submit', function (event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                var data = $(this).serialize();
+                alert("Are you sure?");
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/Request/SubmitRequest',
+                    data: data,
+                    success: function (result) {
+                        alert('Request Submitted Successfully');
+                        window.location.href = '/Request/Index'; // Redirect to the index page
+                    },
+                    error: function () {
+                        alert('Failed to receive the Data');
+                        console.log('Failed');
+                    }
+                });
+            });
+        });
+
+
+
         // Get the datetime input field
         const dateTimeInput = document.getElementById('dateTimeInput');
 
@@ -93,6 +123,9 @@
         const today = new Date().toISOString().slice(0, 16);
         dateTimeInput.min = today;
         dateTimeInput.max = maxDateISO;
+
+
+        
     </script>
 }
 

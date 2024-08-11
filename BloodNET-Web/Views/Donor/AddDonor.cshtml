@@ -1,4 +1,5 @@
 ﻿@using System.Security.Claims
+@using BloodNET_Web.Models.Repository
 
 <section class="donor-details">
     <div class="container">
@@ -6,13 +7,14 @@
             <div class="col">
                 <h2 class="pb-2 text-start">Donor Details</h2>
                 <div class="container donor-container">
-                    <form id="donor-form" method="post" action="/Donor/Add" enctype="multipart/form-data">
+                    <form id="donor-form" enctype="multipart/form-data">
+                        @Html.AntiForgeryToken()
                         <fieldset>
                             <legend>Personal Information</legend>
                             <div class="row">
                                 <div class="col-sm-6 col-md-4 col-lg-3">
                                     <label for="d-name">Name</label>
-                                    <input type="text" id="d-name" class="disabled" placeholder=" @MyUsers.GetNameandEmail(User.FindFirst(ClaimTypes.NameIdentifier)?.Value).name" name="Name" value=" @MyUsers.GetNameandEmail(User.FindFirst(ClaimTypes.NameIdentifier)?.Value).name" disabled>
+                                    <input type="text" id="d-name" class="disabled" placeholder=" @UsersRepository.GetNameandEmail(User.FindFirst(ClaimTypes.NameIdentifier)?.Value).name" name="Name" value=" @UsersRepository.GetNameandEmail(User.FindFirst(ClaimTypes.NameIdentifier)?.Value).name" disabled>
                                 </div>
 @*                                 <div class="col-6 col-sm-6 col-md-4 col-lg-2">
                                     <label for="d-age">Date of Birth</label>
@@ -79,7 +81,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="d-email">Email</label>
-                                    <input type="email" id="d-email" class="disabled" name="Email" placeholder=" @MyUsers.GetNameandEmail(User.FindFirst(ClaimTypes.NameIdentifier)?.Value).email" value="@MyUsers.GetNameandEmail(User.FindFirst(ClaimTypes.NameIdentifier)?.Value).email" disabled>
+                                    <input type="email" id="d-email" class="disabled" name="Email" placeholder=" @UsersRepository.GetNameandEmail(User.FindFirst(ClaimTypes.NameIdentifier)?.Value).email" value="@UsersRepository.GetNameandEmail(User.FindFirst(ClaimTypes.NameIdentifier)?.Value).email" disabled>
                                 </div>
                             </div>
                             <div class="row">
@@ -139,6 +141,41 @@
 
 @section myjs{
     <script>
+
+            $(document).ready(function () {
+                $('#donor-form').submit(function (event) {
+                    event.preventDefault(); 
+
+             
+                    var formData = new FormData(this);
+
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Donor/Add',
+                        data: formData,
+                        processData: false,  // Prevent jQuery from automatically processing the data
+                        contentType: false,  // Prevent jQuery from setting Content-Type
+                        success: function (response) {
+                            console.log('Form submitted successfully');
+                            alert('Form Submitted successfully');
+                            window.location.href = '/User/Index';
+                          
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('Error submitting form:', error);
+                            // Handle error
+                        }
+                    });
+                });
+            });
+
+
+
+
+
+
+
         // Get the date of birth input field
         const dateOfBirthInput = document.getElementById('dateOfBirth');
         const ageErrorSpan = document.getElementById('ageError');

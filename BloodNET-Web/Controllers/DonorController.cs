@@ -7,10 +7,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.IdentityModel.Tokens;
 using System.Configuration;
+using System.Diagnostics;
 using System.Globalization;
 using System.Security.Claims;
+using System.Web;
 
 namespace BloodNET_Web.Controllers
 {
@@ -19,13 +22,26 @@ namespace BloodNET_Web.Controllers
     {
         private readonly IWebHostEnvironment _env;
 
-        public readonly string connectionString = "Server=(localdb)\\mssqllocaldb;Database=BloodNET;Trusted_Connection=True;MultipleActiveResultSets=true";
+        private readonly IRepository<BloodDonors> _bloodDonorRepository;
 
+        private void sanitize(BloodDonors bloodDonors)
+        {
+            bloodDonors.City = HttpUtility.HtmlEncode(bloodDonors.City);
+            bloodDonors.Address = HttpUtility.HtmlEncode(bloodDonors.Address);
+            bloodDonors.Country = HttpUtility.HtmlEncode((string)bloodDonors.Country);
+            bloodDonors.MedicalHistory = HttpUtility.HtmlEncode(bloodDonors.MedicalHistory);
+            bloodDonors.PhoneNumber = HttpUtility.HtmlEncode(bloodDonors.PhoneNumber);
+        }
 
-        public DonorController(IWebHostEnvironment env)
+        public DonorController(IWebHostEnvironment env,IRepository<BloodDonors> _repo)
         {
             _env = env;
+            _bloodDonorRepository = _repo;
         }
+        //public DonorController(IRepository<BloodDonors> _repo)
+        //{
+        //    _bloodDonorRepository = _repo;
+        //}
 
         public IActionResult Index()
         {
@@ -51,35 +67,18 @@ namespace BloodNET_Web.Controllers
             return Path.Combine("User", "Profile", UFileName);
         }
 
-        public  int Eligibility(string  userId)
-        {
-            SqlConnection sqlConnection = new SqlConnection(connectionString);
-            string selectQuery = "SELECT * FROM BloodDonors where Donorid = @uid";
-
-            sqlConnection.Open();
-            SqlCommand selectCommand = new SqlCommand(selectQuery, sqlConnection);
-            selectCommand.Parameters.AddWithValue("uid", userId);
-
-            int check = 0;
-
-            SqlDataReader sqlDataReader = selectCommand.ExecuteReader();
-            while (sqlDataReader.Read())
-            { 
-                check = int.Parse(sqlDataReader["DonorStatus"].ToString());
-            }
-
-            sqlConnection.Close();
-            return check;
-        }
 
         public IActionResult AddDonor()
         {
             return View();
         }
 
+
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public IActionResult Add(BloodDonors bloodDonors)
         {
+
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             bloodDonors.DonorId = userId;
             bloodDonors.ImgUrl = getImageUrl(bloodDonors.Image);
@@ -89,12 +88,19 @@ namespace BloodNET_Web.Controllers
                 bloodDonors.MedicalHistory = "NULL";
             }
 
-            var user = MyUsers.GetNameandEmail(userId);
+            var user = UsersRepository.GetNameandEmail(userId);
             bloodDonors.Email = user.email;
             bloodDonors.Name = user.name;
 
-            IRepository<BloodDonors> rep = new GenericRepository<BloodDonors>(connectionString);
-            rep.Add(bloodDonors);
+            //if (!ModelState.IsValid)
+            //{
+            //    Debug.WriteLine("Model State is not valid");
+            //    return View("AddDonor");
+            //}
+
+            sanitize(bloodDonors);
+
+            _bloodDonorRepository.Add(bloodDonors);
             return RedirectToAction("Index", "User");
         }
     }

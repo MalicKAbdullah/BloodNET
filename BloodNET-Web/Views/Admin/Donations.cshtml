@@ -1,5 +1,5 @@
-﻿@model List<Donation>
-
+﻿@using BloodNET_Web.Models.Repository
+@model List<Donation>
 <section class="realtime-requests">
     <div class="content">
         <h2>Blood Donations</h2>
@@ -38,8 +38,8 @@
                         {
                             <tr>
                                 <td>@donation.DonorId</td>
-                                <td>@MyUsers.GetNameandEmail(@donation.DonorId).name</td>
-                                <td>@MyUsers.GetNameandEmail(@donation.DonorId).email</td>
+                                <td>@UsersRepository.GetNameandEmail(donation.DonorId).name</td>
+                                <td>@UsersRepository.GetNameandEmail(donation.DonorId).email</td>
                                 <td>@donation.RequestId</td>
                                 <td>@donation.Created</td>
 

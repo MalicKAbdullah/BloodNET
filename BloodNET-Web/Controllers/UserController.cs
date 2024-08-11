@@ -13,6 +13,7 @@ namespace BloodNET_Web.Controllers
 
         private readonly IBloodDonors _bloodDonors;
         private readonly IDonation _donation;
+        private readonly IAdmin _admin;
 
         public UserController(IBloodDonors bloodDonors, IDonation donation)
         {
@@ -50,8 +51,8 @@ namespace BloodNET_Web.Controllers
 
         public IActionResult delete(string id)
         {
-            AdminRepository adminRepository = new AdminRepository();
-            adminRepository.DeleteUser(id);
+
+            _admin.DeleteUser(id);
             return RedirectToAction("Users", "Admin");
         }
 

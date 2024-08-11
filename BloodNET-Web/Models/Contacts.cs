@@ -1,9 +1,14 @@
-﻿namespace BloodNET_Web.Models
+﻿using BloodNET_Web.Models.CustomAttributes;
+
+namespace BloodNET_Web.Models
 {
     public class Contacts
     {
         public string Name { get; set; }
         public string Email { get; set; }
+
+
+        [PhoneFormat()]
         public string PhoneNumber { get; set; }
 
         public string Subject { get; set; }

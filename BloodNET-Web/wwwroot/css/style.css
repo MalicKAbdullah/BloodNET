@@ -667,3 +667,33 @@ textarea:focus {
     background-color:#6b6b6b !important;
     color:white !important;
 }
+
+/* Custom styles for Toastify notifications */
+.toastify {
+    /* Override default background and shadow */
+    background: transparent !important; /* Ensure background is transparent */
+    box-shadow: none !important; /* Remove default shadow */
+    border: none !important; /* Remove default border if any */
+}
+
+    /* Ensure the content inside the toast has the correct background */
+    .toastify .toastify-content {
+        background: transparent !important; /* Ensure content area is transparent */
+        color: #000 !important; /* Set text color to ensure readability */
+    }
+
+/* Additional styles for custom toast notifications */
+.custom-toast {
+    background-color: transparent !important; /* Ensure background color is transparent */
+    color: #000 !important; /* Ensure text color is readable */
+    padding: 15px; /* Adjust padding if necessary */
+    border-radius: 8px; /* Match the radius from JavaScript */
+    border: 1px solid #ddd; /* Add border for visual appeal */
+}
+
+.toastify-right, .toastify-left {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: fit-content;
+}
+

@@ -7,8 +7,9 @@
     {
         Layout = "_Layout1";
     }
-
 }
+
+@model Contacts
 
 <div class="contact-form">
     <h2 class="text-center mt-3 pb-2">
@@ -17,79 +18,82 @@
 
     <div class="container col-10">
         <div class="row">
-            <div class="col-lg-6 col-12 ">
-                <form action="" method="post">
-                    <div class=" d-flex flex-column">
-                        <div class="  mt-1">
-                            <span>
-                                <input type="text" placeholder="Name" name="Name" required>
-                            </span>
+            <div class="col-lg-6 col-12">
+                <form action="" method="post" onsubmit="return validatePhoneNumber()">
+                    @Html.AntiForgeryToken()
+                    <div class="d-flex flex-column">
+                        <div class="mt-1">
+                            <input type="text" placeholder="Name" name="Name" required>
                         </div>
 
                         <div class="d-flex justify-content-between flex-wrap">
                             <div class="col-12 col-sm-6 pe-sm-5">
-                                <div class=" mt-1">
+                                <div class="mt-1">
                                     <input type="email" placeholder="Email Address" name="Email" required>
                                 </div>
                             </div>
                             <div class="col-12 col-sm-6">
                                 <div class="mt-1">
-                                    <input type="tel" placeholder="Phone Number" name="PhoneNumber" required>
+                                    <input type="tel" placeholder="Phone Number" name="PhoneNumber" id="phoneNumber" required>
                                 </div>
                             </div>
                         </div>
 
                         <div class="mt-1">
-                            <span>
-                                <input type="text" placeholder="Subject" name="Subject" required>
-                            </span>
+                            <input type="text" placeholder="Subject" name="Subject" required>
                         </div>
 
                         <div class="mt-2">
-                            <span>
-                                <textarea id="w3review" placeholder="Leave a Message" name="Body"
-                                          style="height: 150px; width: 100%;" required></textarea>
-                            </span>
+                            <textarea id="w3review" placeholder="Leave a Message" name="Body" style="height: 150px; width: 100%;" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-design-fill mt-2 p-2">SEND A MESSAGE</button>
-
                     </div>
                 </form>
             </div>
 
             <div class="col-lg-6 col-12 d-flex justify-content-center align-items-center">
-                <div class=" d-flex">
-
-                    <div class="d-flex flex-lg-column align-items-md-start align-items-center text-center text-md-start">
-                        <div class="col-lg-12 mt-4 mt-lg-1 col-4 d-inline-flex align-items-md-center">
-                            <a href="tel:+923226291630">
-                                <h3><i class="fa fa-phone me-2"></i></h3>
-                            </a>
-                            <a href="tel:+923226291630" class="d-none d-lg-block">
-                                <h3>(+92) 322-6291630</h3>
-                            </a>
-                        </div>
-                        <div class="col-lg-12 mt-4 mt-lg-1 col-4 d-inline-flex align-items-md-center">
-
-                            <a href="https://maps.app.goo.gl/5E5qdScQ3f3cntMDA">
-                                <h3><i class="fa fa-home me-2"></i></h3>
-                            </a>
-                            <a href="https://maps.app.goo.gl/5E5qdScQ3f3cntMDA" class="d-none d-lg-block">
-                                <h3>Lahore, Pakistan</h3>
-                            </a>
-                        </div>
-                        <div class="col-lg-12 mt-4 mt-lg-1 col-4 d-inline-flex align-items-md-center">
-                            <a href="mailto:amaliccck@gmail.com">
-                                <h3><i class="fa fa-envelope me-2"></i></h3>
-                            </a>
-                            <a href="mailto:amaliccck@gmail.com" class="d-none d-lg-block">
-                                <h3>amaliccck@gmail.com</h3>
-                            </a>
-                        </div>
+                <div class="d-flex flex-lg-column align-items-md-start align-items-center text-center text-md-start">
+                    <div class="col-lg-12 mt-4 mt-lg-1 col-4 d-inline-flex align-items-md-center">
+                        <a href="tel:+923226291630">
+                            <h3><i class="fa fa-phone me-2"></i></h3>
+                        </a>
+                        <a href="tel:+923226291630" class="d-none d-lg-block">
+                            <h3>(+92) 322-6291630</h3>
+                        </a>
                     </div>
-
+                    <div class="col-lg-12 mt-4 mt-lg-1 col-4 d-inline-flex align-items-md-center">
+                        <a href="https://maps.app.goo.gl/5E5qdScQ3f3cntMDA">
+                            <h3><i class="fa fa-home me-2"></i></h3>
+                        </a>
+                        <a href="https://maps.app.goo.gl/5E5qdScQ3f3cntMDA" class="d-none d-lg-block">
+                            <h3>Lahore, Pakistan</h3>
+                        </a>
+                    </div>
+                    <div class="col-lg-12 mt-4 mt-lg-1 col-4 d-inline-flex align-items-md-center">
+                        <a href="mailto:amaliccck@gmail.com">
+                            <h3><i class="fa fa-envelope me-2"></i></h3>
+                        </a>
+                        <a href="mailto:amaliccck@gmail.com" class="d-none d-lg-block">
+                            <h3>amaliccck@gmail.com</h3>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+@section myjs {
+    <script>
+        function validatePhoneNumber() {
+            var phoneNumber = document.getElementById('phoneNumber').value;
+            var phoneNumberPattern = /^[0-9]{11}$/;
+            if (phoneNumber.match(phoneNumberPattern)) {
+                return true;
+            } else {
+                alert('Phone number must be 11 digits long and contain only digits (0-9).');
+                return false;
+            }
+        }
+    </script>
+}

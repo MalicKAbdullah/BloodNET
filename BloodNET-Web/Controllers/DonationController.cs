@@ -1,10 +1,12 @@
 ﻿using BloodNET_Web.Models;
+using BloodNET_Web.Models.Hubs;
 using BloodNET_Web.Models.Interfaces;
 using BloodNET_Web.Models.Repository;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Security.Claims;
 
@@ -12,13 +14,17 @@ namespace BloodNET_Web.Controllers
 {
     public class DonationController : Controller
     {
-        public readonly string connectionString = "Server=(localdb)\\mssqllocaldb;Database=BloodNET;Trusted_Connection=True;MultipleActiveResultSets=true";
         private readonly DonorController _donorController;
         private readonly IBloodDonors _bloodDonors;
-        public DonationController(IServiceProvider serviceProvider, IBloodDonors bloodDonors)
+        private readonly IRepository<Donation> _donationRepository;
+        private readonly IHubContext<BloodDonationHub> _hubContext;
+
+        public DonationController(IServiceProvider serviceProvider, IBloodDonors bloodDonors,IRepository<Donation> _donationRepo,IHubContext<BloodDonationHub> hubContext)
         {
             _donorController = serviceProvider.GetRequiredService<DonorController>();
             _bloodDonors = bloodDonors;
+            _donationRepository = _donationRepo;
+            _hubContext = hubContext;
         }
 
         public IActionResult Index()
@@ -53,7 +59,7 @@ namespace BloodNET_Web.Controllers
             {
                 CookieOptions option = new CookieOptions();
                 //option.Expires = System.DateTime.Now.AddDays(1);
-                check = _donorController.Eligibility(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+                check = _bloodDonors.Eligibility(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
                 //HttpContext.Response.Cookies.Append("first_request", System.DateTime.Now.ToString(), option);
                 HttpContext.Response.Cookies.Append("eligible", check.ToString());
             }
@@ -70,8 +76,10 @@ namespace BloodNET_Web.Controllers
             donation.RequestId = reqId;
             donation.DonorId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
    
-            IRepository<Donation> DonationRepository = new GenericRepository<Donation>(connectionString);
-            DonationRepository.Add(donation);
+
+            _donationRepository.Add(donation);
+
+            _hubContext.Clients.All.SendAsync("ReceiveDonation", UsersRepository.GetNameandEmail( donation.DonorId).name);
 
             return RedirectToAction("Index","Home");
         }
@@ -80,8 +88,7 @@ namespace BloodNET_Web.Controllers
         [Authorize(Policy = "AdminPolicy")]
         public IActionResult delete(int Id)
         {
-            IRepository<Donation> repository = new GenericRepository<Donation>(connectionString);
-            repository.Delete(Id);
+            _donationRepository.Delete(Id);
             return RedirectToAction("Donations", "Admin");
         }
     }

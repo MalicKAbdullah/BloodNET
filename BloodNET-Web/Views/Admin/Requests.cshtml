@@ -1,4 +1,5 @@
-﻿@model List<BloodRequests>
+﻿@using BloodNET_Web.Models.Repository
+@model List<BloodRequests>
 
 <section class="realtime-requests">
     <div class="content">
@@ -80,7 +81,7 @@
                             <td>@bloodRequests.BloodGroup</td>
                             <td>@bloodRequests.Location</td>
                             <td>@bloodRequests.DTime</td>
-                                <td>@MyUsers.GetNameandEmail(@bloodRequests.userId).email</td>
+                                <td>@UsersRepository.GetNameandEmail(@bloodRequests.userId).email</td>
                             <td>
 
                                     <form method="post" action="/Request/Delete" onclick="return confirm('Are you sure?')">
