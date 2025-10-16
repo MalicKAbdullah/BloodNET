@@ -1,5 +1,7 @@
 # BloodNET-Web
 
+> **🚀 Ready to Deploy?** Start here: **[START-HERE.md](START-HERE.md)**
+
 ## Overview
 BloodNET is a blood donation management system built with ASP.NET Core 8.0. It helps connect blood donors with recipients who need blood donations.
 
