@@ -1,0 +1,42 @@
+name: Deploy to Azure App Service
+
+# This workflow is disabled by default. To enable:
+# 1. Set up Azure App Service
+# 2. Get publish profile from Azure
+# 3. Add AZURE_WEBAPP_PUBLISH_PROFILE secret in GitHub Settings
+# 4. Uncomment the 'on:' section below and comment out 'on: workflow_dispatch'
+
+# on:
+#   push:
+#     branches: [ main ]
+#   workflow_dispatch:
+
+on: workflow_dispatch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'
+    
+    - name: Restore dependencies
+      run: dotnet restore
+      
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+      
+    - name: Publish
+      run: dotnet publish BloodNET-Web/BloodNET-Web.csproj -c Release -o ${{env.DOTNET_ROOT}}/myapp
+      
+    - name: Deploy to Azure Web App
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'bloodnet-app'  # Change this to your app name
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: ${{env.DOTNET_ROOT}}/myapp
